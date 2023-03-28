@@ -33,9 +33,8 @@ if (isset($A_vue['erreur'])) {
                 <label>Adresse mail</label>
             </div>
             <div class="form-group">
-
-                <input type="password" name="motdepasse" class="form-controle" required="required"/>
-                <span class="show">MONTRER</span>
+                <input type="password" id="motdepasse" name="motdepasse" class="form-controle" required="required"/>
+                <span class="show" onclick="showPassword('motdepasse')">MONTRER</span>
                 <label>Mot de passe</label>
             </div>
             <?php echo $erreur; ?>
