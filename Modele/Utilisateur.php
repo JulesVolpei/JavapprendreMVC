@@ -43,7 +43,6 @@ final class Utilisateur {
         // Insertion des données dans la base de données
         $insert = $this->pdo->prepare('INSERT INTO membre(mail, pseudo, motdepasse) VALUES(?, ?, ?)');
         $insert->execute(array($email, $pseudo, $mdphash));
-        // Redirection vers la page d'accueil
     }
     public function connexion($email, $mdp)
     {

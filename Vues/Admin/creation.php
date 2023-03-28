@@ -7,12 +7,12 @@ session_start();
 <head>
     <meta charset="utf-8">  
     <title>Créer exercice </title>
-    <link rel="icon" href="../images/logo.ico">
+    <link rel="icon" href="/images/logo.ico">
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" type="text/css" href="../css/creation_modif.css" />
+    <link rel="stylesheet" type="text/css" href="/css/creation_modif.css" />
 </head>
 <body>
-    <a href="../choix_exercice.php"><img src="../images/logo.png" alt="Logo" class="logo"></a>
+    <a href="../choix_exercice.php"><img src="/images/logo.png" alt="Logo" class="logo"></a>
     <form method="POST" action="index.php?url=Admin/creerExercice">
         <div class="all-container">
             <div class="left-flex-box">
