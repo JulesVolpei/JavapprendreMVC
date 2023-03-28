@@ -47,20 +47,19 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="password" id="motdepasse" name="motdepasse" class="form-controle" required="required" oninput="strengthChecker()"><span class="show">MONTRER</span>
+                    <input type="password" id="motdepasse" name="motdepasse" class="form-controle" required="required" oninput="strengthChecker()">
+                    <span class="show" onclick="showPassword('motdepasse')">MONTRER</span>
                     <label>Mot de passe</label>
                     <div id="strength-bar"></div>
                     <p id="msg"></p>
                 </div>
 
                 <div class="form-group">
-
                     <input type="password" id="motdepasse2" name="motdepasse2" class="form-controle" required="required" />
-                    <span class="show">MONTRER</span>
+                    <span class="show" onclick="showPassword('motdepasse2')">MONTRER</span>
                     <label>Confirmation Mot de passe</label>
-
-
                 </div>
+
                 <?php echo $condition ?>
                 <?php
                 //Regarde si la session  'succes' est set. Succes est le message lors du succè d'inscription
