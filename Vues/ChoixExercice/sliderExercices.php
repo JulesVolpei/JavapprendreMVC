@@ -4,12 +4,13 @@
     <div class="swiper-wrapper">
       <!-- Slides -->
       <?php
-      for ($x = 0; $x < $number_of_rows; ++$x) {
+      // Penser à changer le bouton pour voir les exos
+      for ($x = 0; $x < count($A_vue['exercices']); ++$x) {
         echo '<div class="swiper-slide c1">
-            <div class="nom-exo">' . $rows[$x]['nom_exo'] . '</div>
-            <div class="description-exo">' . $rows[$x]['description_exo'] . '</div>
+            <div class="nom-exo">' . $A_vue['exercices'][$x]['nom_exo'] . '</div>
+            <div class="description-exo">' . $A_vue['exercices'][$x]['description_exo'] . '</div>
             <div class="image">
-              <img src="/images/'.$rows[$x]['fichier'].'.png" alt="'.$rows[$x]['description_exo'] . '">
+              <img src="/images/'.$A_vue['exercices'][$x]['fichier'].'.png" alt="'.$A_vue['exercices'][$x]['description_exo'] . '">
             </div>
             <a href="exercice.php?id=' . $x . '">
               <button class="learn-more" id="button1">
