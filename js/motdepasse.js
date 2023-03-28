@@ -1,29 +1,18 @@
 var input = document.querySelector('.form-controle');
 var show = document.querySelector('.show');
 var a = 0;
-show.addEventListener('click', active);
 
-function active() {
-    if (input.type === "motdepasse") {
-        input.type = "text";
-        show.style.color = "#1DA1F2";
-        show.textContent = "CACHER";
-    } else {
-        input.type = "motdepasse";
-        show.textContent = "MONTRER";
-        show.style.color = "#111";
-    }
-}
 
-function active() {
-    if (input.type === "motdepasse2") {
-        input.type = "text";
-        show.style.color = "#1DA1F2";
-        show.textContent = "CACHER";
+function showPassword(id) {
+    var input = document.getElementById(id);
+    var show = document.querySelector('#'+id+'+.show');
+
+    if (input.type === 'password') {
+        input.type = 'text';
+        show.textContent = 'CACHER';
     } else {
-        input.type = "motdepasse2";
-        show.textContent = "MONTRER";
-        show.style.color = "#111";
+        input.type = 'password';
+        show.textContent = 'MONTRER';
     }
 }
 
@@ -37,15 +26,6 @@ function validateForm() {
         return false;
     }
 }
-
-/* --------------------------------------------------------------------------------------------- */
-/* --------------------------------------------------------------------------------------------- */
-/* --------------------------------------------------------------------------------------------- */
-/* --------------------------------------------------------------------------------------------- */
-/* --------------------------------------------------------------------------------------------- */
-/* --------------------------------------------------------------------------------------------- */
-/* --------------------------------------------------------------------------------------------- */
-
 
 
 let parameters = {
@@ -106,10 +86,6 @@ function strengthChecker() {
                 var a = a + 1;
                 break;
         }
-        /*if (a != 1) {
-            alert("Votre mot de passe n'est pas assez fort !");
-            return false;
-        }*/
     }
 
 }
