@@ -72,20 +72,4 @@ final class Utilisateur {
             return false;
         }
     }
-
-
-
-
-
-    public function registerUser(string $email, string $pseudo, string $password): bool
-    {
-        $hashedPassword = hash("sha256", $password);
-
-        return $this->database->insert('membre', [
-            'mail' => $email,
-            'pseudo' => $pseudo,
-            'motdepasse' => $hashedPassword,
-            'exo' => 0,
-        ]);
-    }
 }
