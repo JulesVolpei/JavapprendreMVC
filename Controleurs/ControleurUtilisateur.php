@@ -7,7 +7,9 @@ final class ControleurUtilisateur {
         // Charge la vue pour l'utilisateur connecté
         $membre = $_SESSION['membre'];
         $pseudo = $membre['pseudo'];
-        Vue::montrer('ChoixExercice/voir');
+            $O_choixExercice =  new ChoixExercice();
+            Vue::montrer('ChoixExercice/voir', array('progression' => $O_choixExercice->getProgression()));
+            Vue::montrer('ChoixExercice/sliderExercices', array('exercices' => $O_choixExercice->getTousLesExercices()));
     } else {
         // Redirige l'utilisateur vers la page de connexion
         Vue::montrer("Utilisateur/connexion");
@@ -23,8 +25,9 @@ final class ControleurUtilisateur {
             $mail = $_POST['mail'];
             $mdp = $_POST['motdepasse'];
             if ($O_Connexion->connexion($mail, $mdp)) {
-                Vue::montrer('ChoixExercice/voir');
-
+                $O_choixExercice =  new ChoixExercice();
+                Vue::montrer('ChoixExercice/voir', array('progression' => $O_choixExercice->getProgression($_SESSION['mem_id'])));
+                Vue::montrer('ChoixExercice/sliderExercices', array('exercices' => $O_choixExercice->getTousLesExercices()));
             } else {
                 Vue::montrer('Utilisateur/connexion', array('erreur' => 'Nom d\'utilisateur ou mot de passe incorrect'));
 

@@ -14,8 +14,13 @@ final class ChoixExercice {
         foreach($result as $exercice) {
             array_push($listeExercices, $exercice);
         }
-
         return $listeExercices;
+    }
+    public function getProgression($mem_id) : array {
+        $result = $this->pdo->prepare('SELECT exo FROM membre where mem_id = ?');
+        $result->execute(array($mem_id));
+        $progression = $result->fetchAll();
+        return $progression;
     }
 
 }

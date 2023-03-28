@@ -37,7 +37,7 @@
 
                 <div class="form-group">
 
-                    <input type="mail" name="mail" class="form-control" required="required" />
+                    <input type="email" name="mail" class="form-control" required="required" />
                     <label>Adresse mail</label>
                 </div>
                 <div class="form-group">

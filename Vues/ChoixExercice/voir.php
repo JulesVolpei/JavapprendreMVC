@@ -21,9 +21,9 @@
       <a href="index.php"><img src="css/images/logo.png" alt="Logo"></a>
 
       <div class="bouttons">
-        <a class="bn14">Progression : <?php echo $count; ?>/<?php echo $couunt; ?> </a>
-        <a href="index.php?url=Accueil" class="bn14">Déconnexion</a>
-        <a href="administrateur/admin.php" class="bn14">Admin</a>
+        <a class="bn14">Progression : <?php echo $A_vue['progression']; ?>/<?php ; ?> </a>
+        <a href="index.php?url=Utilisateur/deconnexion" class="bn14">Déconnexion</a>
+        <a href="index.php?url=Admin/admin" class="bn14">Admin</a>
       </div>
 
     </div>
