@@ -1,0 +1,37 @@
+
+.footer {
+    position: absolute;
+    font-size: 20px;
+    display: flex;
+    text-transform: uppercase;
+    background-color: #2b3035;
+    justify-content: center;
+    width: 100%;
+    left: 0;
+    right: 0;
+    margin-bottom: 0;
+    height: 100px;
+    gap: 300px;
+    align-items: center;
+}
+
+
+.aPropos a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.aPropos a:hover {
+    color: #52D1DC;
+    transition-duration: 0.5s;
+}
+
+.Github a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.Github a:hover {
+    color: #52D1DC;
+    transition-duration: 0.5s;
+}

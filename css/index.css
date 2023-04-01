@@ -132,37 +132,3 @@ html {
     shape-outside: circle();
     margin: 30px;
 }
-
-.footer {
-    position: relative;
-    display: flex;
-    height: 100px;
-    text-transform: uppercase;
-    font-size: 20px;
-    background-color: #2b3035;
-    justify-content: space-between;
-    text-align: center;
-    padding-left: 38%;
-    padding-top: 50px;
-    padding-right: 38%;
-}
-
-.aPropos a {
-    text-decoration: none;
-    color: #fff;
-}
-
-.aPropos a:hover {
-    color: #52D1DC;
-    transition-duration: 0.5s;
-}
-
-.Github a {
-    text-decoration: none;
-    color: #fff;
-}
-
-.Github a:hover {
-    color: #52D1DC;
-    transition-duration: 0.5s;
-}

@@ -3,9 +3,14 @@
 final class Accueil
 {
     private $_S_message = "";
-    public function donneMessage()
+
+    public function donneMessage($message)
     {
-        return $this->_S_message ;
+        $this->_S_message = $message;
     }
 
+    public function getMessage()
+    {
+        return $this->_S_message;
+    }
 }

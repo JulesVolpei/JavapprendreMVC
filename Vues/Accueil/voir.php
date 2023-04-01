@@ -1,6 +1,14 @@
+<!DOCTYPE html>
+<html lang="fr">
 
-    <link rel="stylesheet" href="/css/index.css">
-
+<head>
+    <title>Javapprendre</title>
+    <link rel="icon" href="images/logo.ico">
+    <link rel="icon" href="https://1000logos.net/wp-content/uploads/2020/09/Java-Emblem.jpg">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css">
 
 </head>
 
@@ -9,7 +17,11 @@
     <div class="content">
         <h1>Java<span>pprendre</span></h1>
         <a href="index.php?url=Utilisateur/inscription">Inscription</a>
-        <a href="index.php?url=Utilisateur/connexion">Connexion</a>
+        <?php if (isset($_SESSION['connecte']) && $_SESSION['connecte']): ?>
+            <a href="index.php?url=ChoixExercice">Choix d'exercice</a>
+        <?php else: ?>
+            <a href="index.php?url=Utilisateur/connexion">Connexion</a>
+        <?php endif; ?>
 
     </div>
 </div>
@@ -50,11 +62,5 @@
 
 
 </body>
-
-<footer class="footer">
-    <div class="aPropos"> <a href="aPropos.html">À PROPOS</a> </div>
-    <!---->
-    <div class="Github"> <a href="https://github.com/JulesVolpei/Javapprendre">Notre Github</a> </div>
-</footer>
 
 </html>

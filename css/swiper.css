@@ -1,13 +1,19 @@
+.swiper-parent {
+    position: relative;
+    height: 100vh; /* Ajuster la hauteur selon vos besoins */
+    overflow-x: hidden;
+}
+
 .swiper-container {
-    width: 800px;
+    width: 600px;
     height: 400px;
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     padding: 10px;
-
 }
+
 .c1 {
   background-color: rgb(192, 188, 188);
 }

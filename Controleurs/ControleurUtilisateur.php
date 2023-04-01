@@ -1,5 +1,4 @@
 <?php
-session_start();
 final class ControleurUtilisateur {
 
     public function connexionAction() {
@@ -25,7 +24,8 @@ final class ControleurUtilisateur {
             $mdp = $_POST['motdepasse'];
             if ($O_Connexion->connexion($mail, $mdp)) {
                 $O_choixExercice =  new ChoixExercice();
-                Vue::montrer('ChoixExercice/sliderExercices', array('exercices' => $O_choixExercice->getTousLesExercices()));
+                header('Location: index.php?url=ChoixExercice');
+                exit;
             } else {
                 Vue::montrer('Utilisateur/connexion', array('erreur' => 'Nom d\'utilisateur ou mot de passe incorrect'));
 
