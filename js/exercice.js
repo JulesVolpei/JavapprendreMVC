@@ -91,40 +91,42 @@ function check_tab(element, event) {
 
 function executeCode(index, e) {
     console.log(index);
+
+    // Ajoutez l'URL de votre contrôleur et de l'action `compilerEtExecuter`
+    var compilerUrl = 'index.php?url=Exo/compilerEtExecuter';
+
     $.ajax({
-        url: "./compiler.php",
+        url: compilerUrl,
         method: "POST",
         data: {
             code: document.getElementById("highlighting-content").innerText,
             id: document.getElementById("nom_exo").innerText.split(' ')[0],
             index: index
         },
+        dataType: 'json', // On ajoute cette ligne pour attendre une réponse JSON
+        success: function(data) {
+            var response = data.output; // On utilise la propriété `output` de la réponse JSON
+            $(".output").text(response);
+            var nom = document.getElementById("nom_exo").innerText.substring(12).split(' ').join('');
+            console.log(nom);
+            var image = document.querySelectorAll(".visuel")[0];
+            var test= document.getElementById("test-" + index);
 
-        success: function(response) {
-                $(".output").text(response)
-                var nom = document.getElementById("nom_exo").innerText.substring(12).split(' ').join('');
-                console.log(nom);
-                var image = document.querySelectorAll(".visuel")[0];
-                var t = document.getElementById("test-" + index);
-                //if (nom != "Pirate") {
-                if (response == "Le test est bon\n") {
-                    image.style.backgroundImage = "url(images/" + nom + "Success.png)";
-                    if (t != null) {
-                        t.classList.remove("x");
-                        t.classList.add("tick");
-                    }
-
-                } else if (response != "Exercice fini :)\n") {
-                    image.style.backgroundImage = "url(images/" + nom + "Fail.png)";
-                    if (t != null) {
-                        t.classList.remove("tick");
-                        t.classList.add("x");
-                    }
-
-                } else if (response == "Exercice fini :)\n") {
-                    image.style.backgroundImage = "url(images/" + nom + "Success.png)";
+            if (response === "Le test est bon\n") {
+                image.style.backgroundImage = "url(images/" + nom + "Success.png)";
+                if (test != null) {
+                    test.classList.remove("x");
+                    test.classList.add("tick");
                 }
+            } else if (response !== "Exercice fini :)\n") {
+                image.style.backgroundImage = "url(images/" + nom + "Fail.png)";
+                if (test != null) {
+                    test.classList.remove("tick");
+                    test.classList.add("x");
+                }
+            } else if (response === "Exercice fini :)\n") {
+                image.style.backgroundImage = "url(images/" + nom + "Success.png)";
             }
-            //}
-    })
+        }
+    });
 }

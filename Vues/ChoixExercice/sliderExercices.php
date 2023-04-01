@@ -43,7 +43,7 @@
           <div class="image">
             <img src="/images/'.$A_vue['exercices'][$x]['fichier'].'.png" alt="'.$A_vue['exercices'][$x]['description_exo'] . '">
           </div>
-          <a href="/index.php?id_exo=' . $A_vue['exercices'][$x]['id_exo'] .'&url=Exo">
+          <a href="index.php?id_exo=' . $A_vue['exercices'][$x]['id_exo'] .'&url=Exo">
             <button class="learn-more" id="button1">
               <span class="circle" aria-hidden="true">
                 <span class="icon arrow"></span>
@@ -53,6 +53,7 @@
           </a>
         </div>';
             $_SESSION['id_exo'] = ($A_vue['exercices'][$x]['id_exo']);
+
         }
         ?>
 
