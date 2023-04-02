@@ -6,7 +6,7 @@
 
     <title>Exercice</title>
     <meta charset="UTF-8">
-    <link rel="icon" href="/images/logo.ico">
+    <link rel="icon" href="images/logo.ico">
     <meta name="viewport" content="width = device-width, initial-scale = 1.0">
     <meta name="Choix Exercice" content="Page choix d'exercice" />
     <link rel="stylesheet" type="text/css" href="/css/choixExercice.css">
@@ -18,12 +18,15 @@
 <body>
 <section class="navigation">
     <div class="nav-container">
-        <a href="index.php"><img src="/css/images/logo.png" alt="Logo"></a>
+        <a href="index.php"><img src="css/images/logo.png" alt="Logo"></a>
 
         <div class="bouttons">
             <a class="bn14">Progression : <?php echo $_SESSION['membre']['exo']; ?>/<?php echo count($A_vue['exercices']); ?> </a>
             <a href="index.php?url=Utilisateur/deconnexion" class="bn14">Déconnexion</a>
-            <a href="index.php?url=Admin/admin" class="bn14">Admin</a>
+            <a href="index.php?url=Admin/checkAdmin" class="bn14">Admin</a>
+            <?php if ($_SESSION['userAdmin']) { ?>
+                <a href="index.php?url=Admin/creer" class="bn14">Créer exercice</a>
+            <?php } ?>
         </div>
 
     </div>
@@ -35,25 +38,45 @@
     <div class="swiper-wrapper">
         <!-- Slides -->
         <?php
-        // Penser à changer le bouton pour voir les exos
         for ($x = 0; $x < count($A_vue['exercices']); ++$x) {
-                echo '<div class="swiper-slide c1">
-          <div class="nom-exo">' . $A_vue['exercices'][$x]['nom_exo'] . '</div>
-          <div class="description-exo">' . $A_vue['exercices'][$x]['description_exo'] . '</div>
-          <div class="image">
-            <img src="/images/' . $A_vue['exercices'][$x]['fichier'] . '.png" alt="' . $A_vue['exercices'][$x]['description_exo'] . '">
-          </div>
-          <a href="index.php?id_exo=' . $A_vue['exercices'][$x]['id_exo'] . '&url=Exo">
+            echo '<div class="swiper-slide c1">
+        <div class="nom-exo">' . $A_vue['exercices'][$x]['nom_exo'] . '</div>
+        <div class="description-exo">' . $A_vue['exercices'][$x]['description_exo'] . '</div>
+        <div class="image">
+            <img src="/images/'.$A_vue['exercices'][$x]['fichier'].'.png" alt="'.$A_vue['exercices'][$x]['description_exo'] . '">
+        </div>
+        <a href="/index.php?id_exo=' . $A_vue['exercices'][$x]['id_exo'] .'&url=Exo">
             <button class="learn-more" id="button1">
-              <span class="circle" aria-hidden="true">
-                <span class="icon arrow"></span>
-              </span>
-              <span class="button-text">voir exo</span>
+                <span class="circle" aria-hidden="true">
+                    <span class="icon arrow"></span>
+                </span>
+                <span class="button-text">voir exo</span>
             </button>
-          </a>
-        </div>';
-            $_SESSION['id_exo'] = ($A_vue['exercices'][$x]['id_exo']);
+        </a>';
 
+            if ($_SESSION['userAdmin']) {
+                echo '<a href="index.php?id_exo=' . $A_vue['exercices'][$x]['id_exo'] .'&url=Admin/supprimer ">
+            <button class="learn-more" id="button2">
+                <span class="circle" aria-hidden="true">
+                    <span class="icon arrow"></span>
+                </span>
+                <span class="button-text">supprimer exo</span>
+            </button>
+        </a>';
+            }
+            if ($_SESSION['userAdmin']) {
+                echo '<a href="index.php?id_exo=' . $A_vue['exercices'][$x]['id_exo'] .'&url=Admin/modifier ">
+            <button class="learn-more" id="button2">
+                <span class="circle" aria-hidden="true">
+                    <span class="icon arrow"></span>
+                </span>
+                <span class="button-text">modifier exo</span>
+            </button>
+        </a>';
+            }
+            echo '</div>';
+            $_SESSION['id_exo'] = ($A_vue['exercices'][$x]['id_exo']);
+            $_SESSION['exercice'] = $A_vue['exercices'][$x];
         }
         ?>
 
