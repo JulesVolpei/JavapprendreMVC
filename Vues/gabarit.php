@@ -7,7 +7,9 @@
 <body>
 <?php echo $A_vue['body'] ;
 if (isset($_GET['url'])) {
+
     if (($_GET['url'] == 'Utilisateur/inscription') || ($_GET['url'] == 'TableauScore') || ($_GET['url'] == 'Utilisateur/connexion') || ($_GET['url'] == 'Utilisateur/traitementConnexion') || ($_GET['url'] == 'Utilisateur/deconnexion') || ($_GET['url'] == 'Utilisateur/traitementInscription') || ($_GET['url'] == 'Admin/checkAdmin')) {
+
         return;
     } else {
         Vue::montrer('standard/pied');

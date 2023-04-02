@@ -11,8 +11,9 @@ final class Admin
     }
 
 
-    public function checkAdmin($pseudo) {
-        $compte = $this->pdo->query("SELECT COUNT(*) as compte  FROM admin, membre WHERE admin.mem_id = membre.mem_id and membre.pseudo = '" . $pseudo . "'");
+    public function checkAdmin($mail) {
+        $compte = $this->pdo->prepare("SELECT COUNT(*) as compte  FROM admin, membre WHERE admin.mem_id = membre.mem_id and membre.mail = ?");
+        $compte->execute(array($mail));
         $row = $compte->fetch();
         $admin = $row['compte'];
         return $admin;
@@ -30,9 +31,6 @@ final class Admin
         fwrite($programFiles, $test);
         fclose($programFile);
         fclose($programFiles);
-
-        
-        
         $result = $this->pdo->prepare( "INSERT INTO exos ( nom_exo,description_exo,objectif_exo,text_de_base,fichier_test, numFichiersTests, fichier) VALUES ( ?, ?, ? ,?, ?, 1, ?)"); //On insert dans la table exos le nom de l'exo, la description et le contenu
         $result->execute(array($nom, $description, $obj,$contenuExo,$test, $nom));
     
@@ -57,8 +55,8 @@ final class Admin
         fclose($programFile);
         fclose($programFiles);
 
-        $result = $this->pdo->prepare( 'UPDATE exos set nom_exo = ?, description_exo = ?, objectif_exo = ?, text_de_base = ?, fichier_test = ? where id_exo = "' . $idExo . '"'); //On insert dans la table exos le nom de l'exo, la description et le contenu
-        $result->execute(array($nom, $description, $obj,$contenuExo,$test));
+        $result = $this->pdo->prepare( 'UPDATE exos set nom_exo = ?, description_exo = ?, objectif_exo = ?, text_de_base = ?, fichier_test = ? where id_exo = ?'); //On insert dans la table exos le nom de l'exo, la description et le contenu
+        $result->execute(array($nom, $description, $obj,$contenuExo,$test, $idExo));
     }
 
     public function getExercice($idExo) {

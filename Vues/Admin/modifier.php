@@ -9,19 +9,21 @@ $exercice= $A_vue['exercice'];
 <head>
     <meta charset="utf-8">
     <title>Modifier exercice</title>
-    <link rel="icon" href="../images/logo.ico">
+    <link rel="icon" href="/images/logo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="../css/creation_modif.css" />
+    <link rel="stylesheet" type="text/css" href="/css/creation_modif.css" />
 </head>
 
 <body>
-<a href="index.php?url=Admin/checkAdmin"><img src="../images/logo.png" alt="Logo" class="logo"></a>
-<form method="POST" action="index.php?url=Admin/modifierExercice&id_exo=<?php echo $_SESSION['id_exo']; ?>">
+
+<a href="../choix_exercice.php"><img src="/images/logo.png" alt="Logo" class="logo"></a>
+<form method="POST" action="index.php?url=Admin/modifierExercice&id_exo=<?php echo $_GET['id_exo']; ?>">
+
     <div class="all-container">
         <div class="left-flex-box">
             <div class="flex-container1">
                 <label for="nom">Titre de l'exercice:</label><br>
-                <textarea id="nom" name="nom" required="required"><?php echo $exercice['nom_exo']?></textarea><br>
+                <textarea id="nom" name="nom" required="required"><?php echo $exercice['nom_exo'] ?></textarea><br>
             </div>
             <div class="flex-container2">
                 <label for="description">Description de l'exercice:</label><br>

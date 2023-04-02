@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="fr"> <!--Page de création d'exercice -->
 <head>
     <meta charset="utf-8">  
