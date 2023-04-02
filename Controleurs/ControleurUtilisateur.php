@@ -1,11 +1,13 @@
 <?php
+
+
+
 final class ControleurUtilisateur {
 
     public function connexionAction() {
         if (isset($_SESSION['connecte']) && $_SESSION['connecte']) {
         // Charge la vue pour l'utilisateur connecté
         $membre = $_SESSION['membre'];
-        $pseudo = $membre['pseudo'];
             $O_choixExercice =  new ChoixExercice();
             Vue::montrer('ChoixExercice/sliderExercices', array('exercices' => $O_choixExercice->getTousLesExercices()));
     } else {

@@ -1,30 +1,21 @@
 <?php
+$indiceExo = $A_vue['Indice'];
+if (isset($indiceExo['indice'])) {
+    $indices = $indiceExo['indice'];
 
-
-try {
-    $res = $pdo -> query('select * from exos');
-    $rows = $res->fetchAll(PDO::FETCH_ASSOC);
+    $indices = explode('|', $indices);
 }
 
-catch(PDOException $e)
-{
-    print("exception " . $e->getMessage());
-}
+$resultats = $A_vue['ExoChoisi'];
+$idExo = $_SESSION['id_exo'];
 
 
-session_start();
-$idExo = $_GET['id'];
-$_SESSION['id'] = $idExo;
-$numFichiersTests = $rows[$idExo]['numFichiersTests'];
+$numFichiersTests = $resultats['numFichiersTests'];
 //getting all the test files as a single string:
 
-$chemin_fichier_test = $rows[$idExo]['fichier_test'];
+$chemin_fichier_test = $resultats['fichier_test'];
 //splitting the test files into an array:
 $files = explode("\n", $chemin_fichier_test);
-
-$indices = $rows[$idExo]['indices'];
-
-$indices = explode('|', $indices);
 
 ?>
 
@@ -74,14 +65,14 @@ $indices = explode('|', $indices);
     <div class="nav-container">
 
         <div class="brand">
-            <a href="choix_exercice.php"><img src="images/logo.png" alt="Logo"></a>
+            <a href="index.php?url=ChoixExercice"><img src="/images/logo.png" alt="Logo"></a>
         </div>
 
         <div name="affi" id="time"></div>
-        <div id = "nom_exo">
+        <div id = "nom_exo" data-id="<?php echo $idExo; ?>">
             <?php
             $ind = $idExo + 1;
-            echo $ind.". ".$rows[$idExo]['description_exo'] ; ?>
+            echo $ind.". ".$resultats['description_exo'] ; ?>
         </div>
 
         <!--<a href="#" class="bn14">Indice</a>-->
@@ -91,7 +82,7 @@ $indices = explode('|', $indices);
 <div class = "form-code">
     <a href="#" class="brese" onclick = "javascript:reset_code();"> Reset </a>
 
-    <textarea id = "editing" spellcheck = "false" autocomplete = "off" oninput  = "update(this.value); sync_scroll(this);" onscroll="sync_scroll(this);" onkeydown="check_tab(this, event);"><?php echo $rows[$idExo]['text_de_base'] ?></textarea>
+    <textarea id = "editing" spellcheck = "false" autocomplete = "off" oninput  = "update(this.value); sync_scroll(this);" onscroll="sync_scroll(this);" onkeydown="check_tab(this, event);"><?php echo $resultats['text_de_base'] ?></textarea>
     <!-- Pre and code tags because otherwise we can not use Prism.js in a textarea-->
 
     <pre id = "highlighting" aria-hidden = "true"><code class = "language-java" id = "highlighting-content"></code></pre>
@@ -106,7 +97,7 @@ $indices = explode('|', $indices);
 <div class="output">Output</div>
 <!-- Objectif -->
 <div class = "float-container">
-    <div class = "objectif float-child"><?php echo $rows[$idExo]['objectif_exo'] ?></div>
+    <div class = "objectif float-child"><?php echo $resultats['objectif_exo'] ?></div>
     <!-- Tests unitaires-->
     <div class = "test float-child">
         <?php
@@ -121,10 +112,10 @@ $indices = explode('|', $indices);
     <!--Tests unitaires -->
 </div>
 
-<script src = "js/exercice.js"> </script>
-<script src = "js/chronometre.js"> </script>
+<script src = "/js/exercice.js"> </script>
+<script src = "/js/chronometre.js"> </script>
 <!-- Script for Prism.js library -->
-<script src = "prism/prism.js"></script>
+<script src = "/prism/prism.js"></script>
 <!-- JQUERY -->
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>-->
 
