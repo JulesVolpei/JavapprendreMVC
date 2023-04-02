@@ -8,9 +8,17 @@
 <?php echo $A_vue['body'] ;
 if (isset($_GET['url'])) {
 
-    if (($_GET['url'] == 'Utilisateur/inscription') || ($_GET['url'] == 'TableauScore') || ($_GET['url'] == 'Utilisateur/connexion') || ($_GET['url'] == 'Utilisateur/traitementConnexion') || ($_GET['url'] == 'Utilisateur/deconnexion')
-        || ($_GET['url'] == 'Utilisateur/traitementInscription') || ($_GET['url'] == 'Admin/checkAdmin') || ($_GET['url'] == 'Admin/supprimer') || ($_GET['url'] == 'Admin/supprimerExercice') || ($_GET['url'] == 'Exo')) {
-
+    if (($_GET['url'] == 'Utilisateur/inscription') ||
+        ($_GET['url'] == 'TableauScore') ||
+        ($_GET['url'] == 'Utilisateur/connexion') ||
+        ($_GET['url'] == 'Utilisateur/traitementConnexion') ||
+        ($_GET['url'] == 'Utilisateur/deconnexion') ||
+        ($_GET['url'] == 'Admin/traitementInscription') ||
+        ($_GET['url'] == 'Admin/checkAdmin') ||
+        ($_GET['url'] == 'Admin/supprimer') ||
+        ($_GET['url'] == 'Admin/supprimerExercice') ||
+        ($_GET['url'] == 'Exo')) {
+        
         return;
     } else {
         Vue::montrer('standard/pied');

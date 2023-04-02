@@ -23,8 +23,8 @@ $files = explode("\n", $chemin_fichier_test);
 <html>
 <head>
     <title>Exercice</title>
-    <link rel =  "stylesheet" type = "text/css" href = "/css/choixExercice.css">
-    <link rel =  "stylesheet" type = "text/css" href = "/prism/prism.css">
+    <link rel = "stylesheet" type = "text/css" href = "/css/choixExercice.css">
+    <link rel = "stylesheet" type = "text/css" href = "/prism/prism.css">
 
 
     <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
