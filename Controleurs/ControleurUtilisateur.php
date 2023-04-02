@@ -1,5 +1,7 @@
 <?php
 
+
+
 final class ControleurUtilisateur {
 
     public function connexionAction() {
