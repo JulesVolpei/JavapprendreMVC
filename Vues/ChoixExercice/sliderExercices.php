@@ -48,7 +48,7 @@
 ';
 
             if ($x >= 5) {
-                echo '    <img src="/images/sofian.png" alt="'.$A_vue['exercices'][$x]['description_exo'] . '">
+                echo '    <img src="css/images/crayon.png" alt="'.$A_vue['exercices'][$x]['description_exo'] . '">
 ';
             } else {
                 echo '    <img src="/images/'.$A_vue['exercices'][$x]['fichier'].'.png" alt="'.$A_vue['exercices'][$x]['description_exo'] . '">
