@@ -2,12 +2,10 @@
 * {
     margin: 0;
     padding: 0;
-    border-radius: 5px;
     box-sizing: border-box;
 }
 
 body {
-  font-family: Consolas, monaco, monospace;
   font-weight: 700;
   font-size: large;
   background-image: url(images/pageACarreaux.jpg);
@@ -23,15 +21,17 @@ body {
 textarea {
   resize: none;
   font-size: 12pt;
-  border: 2px solid rgb(172, 172, 172);
   box-shadow: 1px 1px 1px #999;
   padding: 5px 8px 5px 8px;
+  border-radius: 5px;
 }
 
 label {
+  font-family: Consolas, monaco, monospace;
   background-color: rgba(255, 255, 255, 0.8);
   padding: 8px;
   border: 1px solid black;
+  border-radius: 5px;
 }
 
 .flex-container1 {
@@ -83,6 +83,7 @@ label {
   margin-top: 30px;
   overflow: hidden;
   z-index: 111;
+  border-radius: 5px;
 }
 
 .button button {
@@ -98,6 +99,7 @@ label {
   font-family: 'Montserrat', sans-serif;
   background-color: white;
   border: 1px solid black;
+  border-radius: 5px;
 }
 
 .button :hover{

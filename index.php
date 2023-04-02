@@ -2,7 +2,6 @@
 
 session_start();
 // Ce fichier est le point d'entrée de votre application
-session_start();
 
     require 'Noyau/ChargementAuto.php';
 
