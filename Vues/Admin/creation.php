@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <?php
 //On commence la session
-session_start();
 ?>
 <html lang="fr"> <!--Page de création d'exercice -->
 <head>
