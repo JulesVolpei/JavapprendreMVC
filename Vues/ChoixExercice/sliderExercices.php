@@ -48,7 +48,8 @@
 ';
 
             if ($x >= 5) {
-                echo '    <img src="css/images/crayon.png" alt="'.$A_vue['exercices'][$x]['description_exo'] . '">
+                echo ' <a class="type-exercice">(Exercice créé par la communauté)<a/>
+                <img src="css/images/crayon.png" alt="'.$A_vue['exercices'][$x]['description_exo'] . '">
 ';
             } else {
                 echo '    <img src="/images/'.$A_vue['exercices'][$x]['fichier'].'.png" alt="'.$A_vue['exercices'][$x]['description_exo'] . '">
@@ -56,7 +57,7 @@
             }
 
             echo '  </div>
-          <a href="/index.php?id_exo=' . $A_vue['exercices'][$x]['id_exo'] .'&url=Exo">
+          <a href="index.php?id_exo=' . $A_vue['exercices'][$x]['id_exo'] .'&url=Exo">
 
             <button class="learn-more" id="button1">
                 <span class="circle" aria-hidden="true">
@@ -68,21 +69,21 @@
 
             if (isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) {
                 echo '<a href="index.php?id_exo=' . $A_vue['exercices'][$x]['id_exo'] .'&url=Admin/supprimer ">
-            <button class="learn-more" id="button2">
-                <span class="circle" aria-hidden="true">
+            <button class="learn-more2" id="button2">
+                <span class="circle2" aria-hidden="true">
                     <span class="icon arrow"></span>
                 </span>
-                <span class="button-text">supprimer exo</span>
+                <span class="button-text2">supprimer exo</span>
             </button>
         </a>';
             }
             if (isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) {
                 echo '<a href="index.php?id_exo=' . $A_vue['exercices'][$x]['id_exo'] .'&url=Admin/modifier ">
-            <button class="learn-more" id="button2">
-                <span class="circle" aria-hidden="true">
+            <button class="learn-more3" id="button3">
+                <span class="circle3" aria-hidden="true">
                     <span class="icon arrow"></span>
                 </span>
-                <span class="button-text">modifier exo</span>
+                <span class="button-text3">modifier exo</span>
             </button>
 
         </a>';

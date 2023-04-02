@@ -42,6 +42,7 @@ final class Admin
         $statement->bindValue(':idExo', $idExo, PDO::PARAM_INT);
         $statement->execute();
     }
+
     function modifierExercice($nom, $description, $contenuExo, $obj, $test, $idExo)
     {
 

@@ -11,7 +11,7 @@ $exercice= $A_vue['exercice'];
     <title>Modifier exercice</title>
     <link rel="icon" href="/images/logo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="/css/creation_modif.css" />
+    <link rel="stylesheet" href="css/creation_modif.css">
 </head>
 
 <body>
