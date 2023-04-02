@@ -24,7 +24,7 @@
             <a class="bn14">Progression : <?php echo $_SESSION['membre']['exo']; ?>/<?php echo count($A_vue['exercices']); ?> </a>
             <a href="index.php?url=Utilisateur/deconnexion" class="bn14">Déconnexion</a>
             <a href="index.php?url=Admin/checkAdmin" class="bn14">Admin</a>
-            <?php if ($_SESSION['userAdmin']) { ?>
+            <?php if (isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) { ?>
                 <a href="index.php?url=Admin/creer" class="bn14">Créer exercice</a>
             <?php } ?>
         </div>
@@ -66,7 +66,7 @@
             </button>
         </a>';
 
-            if ($_SESSION['userAdmin']) {
+            if (isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) {
                 echo '<a href="index.php?id_exo=' . $A_vue['exercices'][$x]['id_exo'] .'&url=Admin/supprimer ">
             <button class="learn-more" id="button2">
                 <span class="circle" aria-hidden="true">
@@ -76,7 +76,7 @@
             </button>
         </a>';
             }
-            if ($_SESSION['userAdmin']) {
+            if (isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) {
                 echo '<a href="index.php?id_exo=' . $A_vue['exercices'][$x]['id_exo'] .'&url=Admin/modifier ">
             <button class="learn-more" id="button2">
                 <span class="circle" aria-hidden="true">
