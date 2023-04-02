@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<?php
-//On commence la session
-?>
+
 <html lang="fr"> <!--Page de création d'exercice -->
 <head>
     <meta charset="utf-8">  
@@ -11,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="/css/creation_modif.css" />
 </head>
 <body>
-    <a href="../choix_exercice.php"><img src="/images/logo.png" alt="Logo" class="logo"></a>
+    <a href="index.php?url=Admin/checkAdmin"><img src="/images/logo.png" alt="Logo" class="logo"></a>
     <form method="POST" action="index.php?url=Admin/creerExercice">
         <div class="all-container">
             <div class="left-flex-box">
