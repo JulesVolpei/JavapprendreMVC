@@ -18,7 +18,7 @@
 <body>
 <section class="navigation">
     <div class="nav-container">
-        <a href="index.php"><img src="css/images/logo.png" alt="Logo"></a>
+        <a href="index.php"><img src="/css/images/logo.png" alt="Logo"></a>
 
         <div class="bouttons">
             <a class="bn14">Progression : <?php echo $_SESSION['membre']['exo']; ?>/<?php echo count($A_vue['exercices']); ?> </a>
@@ -56,7 +56,7 @@
             }
 
             echo '  </div>
-          <a href="/index.php?id_exo=' . $A_vue['exercices'][$x]['id_exo'] .'&url=Exo">
+          <a href="index.php?id_exo=' . $A_vue['exercices'][$x]['id_exo'] .'&url=Exo">
 
             <button class="learn-more" id="button1">
                 <span class="circle" aria-hidden="true">
