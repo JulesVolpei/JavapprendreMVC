@@ -23,13 +23,10 @@
         <div class="bouttons">
             <a class="bn14">Progression : <?php echo $_SESSION['membre']['exo']; ?>/<?php echo count($A_vue['exercices']); ?> </a>
             <a href="index.php?url=Utilisateur/deconnexion" class="bn14">Déconnexion</a>
-            <?php if (isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) {
-                ?>
+            <a href="index.php?url=Admin/checkAdmin" class="bn14">Admin</a>
+            <?php if (isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) { ?>
                 <a href="index.php?url=Admin/creer" class="bn14">Créer exercice</a>
-            <?php } else {
-              ?>
-                <a href="index.php?url=Admin/checkAdmin" class="bn14">Admin</a>
-           <?php } ?>
+            <?php } ?>
         </div>
 
     </div>
@@ -51,7 +48,7 @@
 ';
 
             if ($x >= 5) {
-                echo '    <img src="/images/sofian.png" alt="'.$A_vue['exercices'][$x]['description_exo'] . '">
+                echo '    <img src="css/images/crayon.png" alt="'.$A_vue['exercices'][$x]['description_exo'] . '">
 ';
             } else {
                 echo '    <img src="/images/'.$A_vue['exercices'][$x]['fichier'].'.png" alt="'.$A_vue['exercices'][$x]['description_exo'] . '">
@@ -67,7 +64,6 @@
                 </span>
                 <span class="button-text">voir exo</span>
             </button>
-            
         </a>';
 
             if (isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) {
@@ -79,8 +75,6 @@
                 <span class="button-text">supprimer exo</span>
             </button>
         </a>';
-                $_SESSION['id_exo'] = ($A_vue['exercices'][$x]['id_exo']);
-
             }
             if (isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) {
                 echo '<a href="index.php?id_exo=' . $A_vue['exercices'][$x]['id_exo'] .'&url=Admin/modifier ">
@@ -92,7 +86,6 @@
             </button>
 
         </a>';
-                $_SESSION['id_exo'] = ($A_vue['exercices'][$x]['id_exo']);
             }
             echo '</div>';
             $_SESSION['id_exo'] = ($A_vue['exercices'][$x]['id_exo']);
