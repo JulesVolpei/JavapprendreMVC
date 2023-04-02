@@ -4,18 +4,29 @@
     padding: 0;
     box-sizing: border-box;
 }
-
-body {
+html, body{
+  background: url(images/pageACarreaux.png) no-repeat fixed center;
   font-weight: 700;
   font-size: large;
-  background-image: url(images/pageACarreaux.jpg);
   background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
   height: 100%;
   margin: 0;
   color: black;
+}
+
+
+.logo {
+  position: absolute;
+  top: 3%;
+  left: 3%;
+  transform: translate(-3%, -3%) scale(1.2);
+  border-radius: 50%;
+  padding: 20px;
+  transition: transform 0.2s ease-in-out;
+}
+
+img:hover {
+  transform: scale(1.5);
 }
 
 textarea {

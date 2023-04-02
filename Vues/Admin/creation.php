@@ -2,14 +2,14 @@
 
 <html lang="fr"> <!--Page de création d'exercice -->
 <head>
-    <meta charset="utf-8">  
+    <meta charset="utf-8">
     <title>Créer exercice </title>
     <link rel="icon" href="/images/logo.ico">
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" type="text/css" href="/css/creation_modif.css" />
+    <link rel="stylesheet" href="css/creation_modif.css">
 </head>
 <body>
-    <a href="index.php?url=Admin/checkAdmin"><img src="/images/logo.png" alt="Logo" class="logo"></a>
+    <div class="image-container"></div><a href="index.php?url=Admin/checkAdmin"><img src="/images/logo.png" alt="Logo" class="logo"></a><div/>
     <form method="POST" action="index.php?url=Admin/creerExercice">
         <div class="all-container">
             <div class="left-flex-box">
@@ -26,7 +26,7 @@
                     <textarea id="objectifs" name="objectifs" required="required"></textarea><br>
                 </div>
                 <div class="button">
-                    <button name="creer"> Confirmer la création</button>
+                    <button name="creer">Confirmer la création</button>
                 </div>
             </div>
             <div class="right-flex-box">
