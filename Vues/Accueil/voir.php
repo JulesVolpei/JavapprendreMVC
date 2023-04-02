@@ -9,8 +9,11 @@
     <div class="content">
         <h1>Java<span>pprendre</span></h1>
         <a href="index.php?url=Utilisateur/inscription">Inscription</a>
-        <a href="index.php?url=Utilisateur/connexion">Connexion</a>
-
+        <?php if (isset($_SESSION['connecte']) && $_SESSION['connecte']): ?>
+            <a href="index.php?url=ChoixExercice">Choix d'exercice</a>
+        <?php else: ?>
+            <a href="index.php?url=Utilisateur/connexion">Connexion</a>
+        <?php endif; ?>
     </div>
 </div>
 

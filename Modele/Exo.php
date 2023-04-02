@@ -24,6 +24,15 @@ final class Exo
         $indice= $result->fetch();
         return $indice;
     }
+    public function getTousLesExercices() : array {
+        $result = $this->pdo->prepare('SELECT * FROM exos');
+        $result->execute();
+        $listeExercices = array();
+        foreach($result as $exercice) {
+            array_push($listeExercices, $exercice);
+        }
+        return $listeExercices;
+    }
     public function getExoEtTests($idExo) {
         $pdo = $this->getPdo();
         $sql = "SELECT * FROM exos WHERE id_exo = :id_exo";
@@ -31,4 +40,5 @@ final class Exo
         $stmt->execute(['id_exo' => $idExo]);
         return $stmt->fetch();
     }
+
 }

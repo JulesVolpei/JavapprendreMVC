@@ -65,7 +65,7 @@ function sync_scroll(element) {
 
 function check_tab(element, event) {
     let code = element.value;
-    if (event.key == "Tab") {
+    if (event.key === "Tab") {
         /* Tab key pressed */
         event.preventDefault(); // stop normal
         console.log(code);
@@ -88,45 +88,42 @@ function check_tab(element, event) {
         update(element.value); // Update text to include indent
     }
 }
-
 function executeCode(index, e) {
     console.log(index);
-
-    // Ajoutez l'URL de votre contrôleur et de l'action `compilerEtExecuter`
-    var compilerUrl = 'index.php?url=Exo/compilerEtExecuter';
-
     $.ajax({
-        url: compilerUrl,
+        url: "Modele/Compiler.php",
         method: "POST",
         data: {
             code: document.getElementById("highlighting-content").innerText,
             id: document.getElementById("nom_exo").innerText.split(' ')[0],
             index: index
         },
-        dataType: 'json', // On ajoute cette ligne pour attendre une réponse JSON
-        success: function(data) {
-            var response = data.output; // On utilise la propriété `output` de la réponse JSON
-            $(".output").text(response);
+
+        success: function(response) {
+            $(".output").text(response)
             var nom = document.getElementById("nom_exo").innerText.substring(12).split(' ').join('');
             console.log(nom);
             var image = document.querySelectorAll(".visuel")[0];
-            var test= document.getElementById("test-" + index);
-
+            var t = document.getElementById("test-" + index);
+            //if (nom != "Pirate") {
             if (response === "Le test est bon\n") {
                 image.style.backgroundImage = "url(images/" + nom + "Success.png)";
-                if (test != null) {
-                    test.classList.remove("x");
-                    test.classList.add("tick");
+                if (t != null) {
+                    t.classList.remove("x");
+                    t.classList.add("tick");
                 }
+
             } else if (response !== "Exercice fini :)\n") {
                 image.style.backgroundImage = "url(images/" + nom + "Fail.png)";
-                if (test != null) {
-                    test.classList.remove("tick");
-                    test.classList.add("x");
+                if (t != null) {
+                    t.classList.remove("tick");
+                    t.classList.add("x");
                 }
+
             } else if (response === "Exercice fini :)\n") {
                 image.style.backgroundImage = "url(images/" + nom + "Success.png)";
             }
         }
-    });
+        //}
+    })
 }

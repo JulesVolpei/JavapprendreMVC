@@ -1,6 +1,11 @@
 <?php
-
 $indiceExo = $A_vue['Indice'];
+if (isset($indiceExo['indice'])) {
+    $indices = $indiceExo['indice'];
+
+    $indices = explode('|', $indices);
+}
+
 $resultats = $A_vue['ExoChoisi'];
 $idExo = $_SESSION['id_exo'];
 
@@ -11,10 +16,6 @@ $numFichiersTests = $resultats['numFichiersTests'];
 $chemin_fichier_test = $resultats['fichier_test'];
 //splitting the test files into an array:
 $files = explode("\n", $chemin_fichier_test);
-
-$indices = $indiceExo['indice'];
-
-$indices = explode('|', $indices);
 
 ?>
 
@@ -64,7 +65,7 @@ $indices = explode('|', $indices);
     <div class="nav-container">
 
         <div class="brand">
-            <a href="index.php?url=Utilisateur/connexion"><img src="/images/logo.png" alt="Logo"></a>
+            <a href="index.php?url=ChoixExercice"><img src="/images/logo.png" alt="Logo"></a>
         </div>
 
         <div name="affi" id="time"></div>
@@ -79,7 +80,7 @@ $indices = explode('|', $indices);
 </section>
 <!-- Form for inserting code -->
 <div class = "form-code">
-    <a href="#" class="brese" onclick = "reset_code();"> Reset </a>
+    <a href="#" class="brese" onclick = "javascript:reset_code();"> Reset </a>
 
     <textarea id = "editing" spellcheck = "false" autocomplete = "off" oninput  = "update(this.value); sync_scroll(this);" onscroll="sync_scroll(this);" onkeydown="check_tab(this, event);"><?php echo $resultats['text_de_base'] ?></textarea>
     <!-- Pre and code tags because otherwise we can not use Prism.js in a textarea-->
@@ -103,7 +104,7 @@ $indices = explode('|', $indices);
         for($x = 1; $x < $numFichiersTests; ++$x)
         {
             $indice = $indices[$x - 1];
-            echo '<br><div class = "test-child">Test ' . $files[$x] .'<div class = "sign" id = "test-'.$x.'"></div><div id = "dialog-'.$x.'" title = "Indice exo">'.$indice.'</div> <button id = "opener-'.$x.'" class = "bn15">Voir indice</button><button class = "bn15" onclick = "executeCode('.$x. ', this,)">Run</button></div><br>';
+            echo '<br><div class = "test-child">Test ' . $files[$x] .'<div class = "sign" id = "test-'.$x.'"></div><div id = "dialog-'.$x.'" title = "Indice exo">'.$indice.'</div> <button id = "opener-'.$x.'" class = "bn15">Voir indice</button><button class = "bn15" onclick = "executeCode('.$x. ', this)">Run</button></div><br>';
         }
         ?>
 

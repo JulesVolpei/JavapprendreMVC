@@ -6,7 +6,7 @@
 
     <title>Exercice</title>
     <meta charset="UTF-8">
-    <link rel="icon" href="images/logo.ico">
+    <link rel="icon" href="/images/logo.ico">
     <meta name="viewport" content="width = device-width, initial-scale = 1.0">
     <meta name="Choix Exercice" content="Page choix d'exercice" />
     <link rel="stylesheet" type="text/css" href="/css/choixExercice.css">
@@ -18,7 +18,7 @@
 <body>
 <section class="navigation">
     <div class="nav-container">
-        <a href="index.php"><img src="css/images/logo.png" alt="Logo"></a>
+        <a href="index.php"><img src="/css/images/logo.png" alt="Logo"></a>
 
         <div class="bouttons">
             <a class="bn14">Progression : <?php echo $_SESSION['membre']['exo']; ?>/<?php echo count($A_vue['exercices']); ?> </a>
@@ -37,13 +37,13 @@
         <?php
         // Penser à changer le bouton pour voir les exos
         for ($x = 0; $x < count($A_vue['exercices']); ++$x) {
-            echo '<div class="swiper-slide c1">
+                echo '<div class="swiper-slide c1">
           <div class="nom-exo">' . $A_vue['exercices'][$x]['nom_exo'] . '</div>
           <div class="description-exo">' . $A_vue['exercices'][$x]['description_exo'] . '</div>
           <div class="image">
-            <img src="/images/'.$A_vue['exercices'][$x]['fichier'].'.png" alt="'.$A_vue['exercices'][$x]['description_exo'] . '">
+            <img src="/images/' . $A_vue['exercices'][$x]['fichier'] . '.png" alt="' . $A_vue['exercices'][$x]['description_exo'] . '">
           </div>
-          <a href="index.php?id_exo=' . $A_vue['exercices'][$x]['id_exo'] .'&url=Exo">
+          <a href="index.php?id_exo=' . $A_vue['exercices'][$x]['id_exo'] . '&url=Exo">
             <button class="learn-more" id="button1">
               <span class="circle" aria-hidden="true">
                 <span class="icon arrow"></span>
