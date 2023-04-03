@@ -5,49 +5,55 @@ final class TableauScore
 
     public function __construct()
     {
-        $this->pdo = Connection::getInstance();
+        // On récupère l'instance de la connexion à la base de données
+        $this->pdo = Connection::getInstance()->pdo;
     }
 
     public function getScores(): array
     {
-        // On vérifie que la variable de session "id" est initialisée
-        if (!isset($_SESSION['id_exo'])) {
-            // on retourne un tableau vide si la variable n'est pas initialisée
+        // On vérifie que la variable GET "id_exo" est initialisée
+        if (!isset($_GET['id_exo'])) {
+            // Si la variable n'est pas initialisée, on retourne un tableau vide
             return array();
         }
 
-        $idExo = $_SESSION['id_exo'] + 1;
-        $customWhere = "membre.mem_id=score.mem_id AND id_exo = :id_exo";
-        $result = $this->pdo->select('membre, score', ['id_exo' => $idExo], 'pseudo, temps', $customWhere);
-        return $result;
-    }
-    public function getExercice(): array
-    {
-        // On vérifie que la variable de session "id" est initialisée
-        if (!isset($_SESSION['id_exo'])) {
-            // on retourne un tableau vide si la variable n'est pas initialisée
-            return array();
-        }
+        // On récupère la valeur de "id_exo" dans la variable $idExo
+        $idExo = $_GET['id_exo'];
 
-        $idExo = $_SESSION['id_exo'] + 1;
-        $result = $this->pdo->select('exos', ['id_exo' => $idExo]);
-        return $result[0] ?? array();
-    }
+        // On prépare une requête SQL pour récupérer les scores et les pseudos correspondants à l'exercice sélectionné
+        $query = $this->pdo->prepare('select pseudo, temps from membre, score where membre.mem_id=score.mem_id and id_exo = :id_Exo ORDER BY temps ASC');
 
-    public function getScoresByIdExo(int $id_exo): array
-    {
-        $query = $this->pdo->prepare('SELECT pseudo, temps FROM membre, score WHERE membre.mem_id=score.mem_id AND id_exo = :id_exo ORDER BY temps ASC');
-        $query->bindParam(':id_exo', $id_exo, PDO::PARAM_INT);
+        // On lie la variable $idExo au paramètre ":id_Exo" de la requête préparée
+        $query->bindParam("id_Exo", $idExo);
+
+        // On exécute la requête préparée
         $query->execute();
+
+        // On retourne le résultat sous forme de tableau associatif
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getExerciceByIdExo(int $id_exo): array
+    public function getExercice(): array
     {
-        $query = $this->pdo->prepare('SELECT * FROM exos WHERE id_exo = :id_exo');
-        $query->bindParam(':id_exo', $id_exo, PDO::PARAM_INT);
+        // On vérifie que la variable GET "id_exo" est initialisée
+        if (!isset($_GET['id_exo'])) {
+            // Si la variable n'est pas initialisée, on retourne un tableau vide
+            return array();
+        }
+
+        // On récupère la valeur de "id_exo" dans la variable $idExo
+        $idExo = $_GET['id_exo'];
+
+        // On prépare une requête SQL pour récupérer les informations de l'exercice sélectionné
+        $query = $this->pdo->prepare('select * from exos where id_exo = :id_Exo');
+
+        // On lie la variable $idExo au paramètre ":id_Exo" de la requête préparée
+        $query->bindParam("id_Exo", $idExo);
+
+        // On exécute la requête préparée
         $query->execute();
+
+        // On retourne le résultat sous forme de tableau associatif
         return $query->fetch(PDO::FETCH_ASSOC);
     }
-
 }
