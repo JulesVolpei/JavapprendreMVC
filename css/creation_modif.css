@@ -26,7 +26,7 @@ html, body{
   width: 115px;
 }
 
-img:hover {
+.img:hover {
   transform: scale(1.5);
 }
 
