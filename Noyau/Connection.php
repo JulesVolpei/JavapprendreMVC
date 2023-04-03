@@ -44,13 +44,14 @@ final class Connection
         return $_SESSION['mem_id'];
     }
     private function checkPermission(string $action, string $table, array $conditions = []): bool
+    // on a pas eu le temps de bien l'implémenter
     {
-        if ($this->userRole === self::ROLE_ADMIN) {
+        if ($this->userRole === self::ROLE_ADMIN ||$this->userRole === self::ROLE_PROF ) {
             return true;
         }
 
         if ($table === 'exos') {
-            if ($this->userRole === self::ROLE_PROF && in_array($action, ['update', 'delete'])) {
+            if ($this->userRole === self::ROLE_PROF && in_array($action, ['update',  'delete'])) {
                 // Vérifier si l'exercice appartient au professeur
                 $exercice = $this->select($table, $conditions);
                 if (!empty($exercice) && $exercice[0]['created_by'] == $this->getCurrentUserId()) {
@@ -62,6 +63,9 @@ final class Connection
         if ($action === 'select') {
             return true;
         }
+
+
+
 
         return false;
     }

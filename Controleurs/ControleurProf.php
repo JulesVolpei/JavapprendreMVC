@@ -22,11 +22,11 @@ class ControleurProf
     public function confirmAction()
     {
         $O_prof = new Prof();
-
+        $mem_id = $_SESSION['mem_id'];
         $token = $_POST['token'];
-        $this->$O_prof->updateByToken($token, ['is_confirmed' => 1]);
-
+        $O_prof->updateByToken($token, $mem_id);
         echo "Inscription confirmée. En attente de l'approbation de l'administrateur.";
+        header('Location: index.php?url=ChoixExercice');
     }
 }
 
