@@ -5,36 +5,33 @@ final class TableauScore
 
     public function __construct()
     {
-        $this->pdo = Connection::getInstance()->pdo;
+        $this->pdo = Connection::getInstance();
     }
 
     public function getScores(): array
     {
-        // On véréfie que la variable de session "id" est initialisée
-        if (!isset($_SESSION['id'])) {
+        // On vérifie que la variable de session "id" est initialisée
+        if (!isset($_SESSION['id_exo'])) {
             // on retourne un tableau vide si la variable n'est pas initialisée
             return array();
         }
 
-        $idExo = $_SESSION['id'] + 1;
-        $query = $this->pdo->prepare('select pseudo, temps from membre, score where membre.mem_id=score.mem_id and id_exo = :id_Exo ORDER BY temps ASC');
-        $query->bindParam("id_Exo", $idExo);
-        $query->execute();
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+        $idExo = $_SESSION['id_exo'] + 1;
+        $customWhere = "membre.mem_id=score.mem_id AND id_exo = :id_exo";
+        $result = $this->pdo->select('membre, score', ['id_exo' => $idExo], 'pseudo, temps', $customWhere);
+        return $result;
     }
 
     public function getExercice(): array
     {
-        // On véréfie que la variable de session "id" est initialisée
-        if (!isset($_SESSION['id'])) {
+        // On vérifie que la variable de session "id" est initialisée
+        if (!isset($_SESSION['id_exo'])) {
             // on retourne un tableau vide si la variable n'est pas initialisée
             return array();
         }
 
-        $idExo = $_SESSION['id'] + 1;
-        $query = $this->pdo->prepare('select * from exos where id_exo = :id_Exo');
-        $query->bindParam("id_Exo", $idExo);
-        $query->execute();
-        return $query->fetch(PDO::FETCH_ASSOC);
+        $idExo = $_SESSION['id_exo'] + 1;
+        $result = $this->pdo->select('exos', ['id_exo' => $idExo]);
+        return $result[0] ?? array();
     }
 }

@@ -2,7 +2,7 @@ package javatests;
 
 public class Calculatrice {
     public double addition(int valeurUne, int valeurDeux) {
-        return 0;
+        return valeurUne + valeurDeux;
     }
 
     public double soustraction(int valeurUne, int valeurDeux) {

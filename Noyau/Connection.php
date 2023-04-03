@@ -137,20 +137,14 @@ final class Connection
         }
         $query = "SELECT $selectFields FROM $table";
 
-        if (!empty($conditions)) {
-            $parameters = [];
-            foreach ($conditions as $key => $value) {
-                $parameters[] = "$key = :$key";
-            }
-            $query .= ' WHERE ' . implode(' AND ', $parameters);
-        } elseif (!empty($customWhere)) {
+        if (!empty($customWhere)) {
             $query .= ' WHERE ' . $customWhere;
         }
 
         try {
             $stmt = $this->pdo->prepare($query);
             foreach ($conditions as $key => $value) {
-                $stmt->bindParam(":$key", $conditions[$key]);
+                $stmt->bindParam(":$key", $value);
             }
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -158,6 +152,5 @@ final class Connection
             die('Error : ' . $e->getMessage());
         }
     }
-
 }
 
