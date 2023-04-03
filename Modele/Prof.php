@@ -9,7 +9,7 @@ class Prof
         $this->pdo = Connection::getInstance(Connection::ROLE_PROF);
     }
 
-    public function create($email, $nom, $profession, $token, $mem_id)
+    public function createProf($email, $nom, $profession, $token, $mem_id)
     {
         $data = [
             'mail' => $email,

@@ -38,14 +38,22 @@ final class Admin
             'description_exo' => $description,
             'objectif_exo' => $obj,
             'text_de_base' => $contenuExo,
-            'fichier_test' => $test,
             'numFichiersTests' => 1,
             'fichier' => $nom
         ]);
-    
+        $customWhere = "nom_exo = :nom_exo";
+        $exercice = $this->pdo->select('exos', ['nom_exo' => $nom], '*', $customWhere);
+        $idExo = $exercice[0]['id_exo'];
+        $stmt = $this->pdo->insert('tests', [
+            'id_exo' => $idExo,
+            'fichier' => $test,
+        ]);
+
     }
 
     function supprimerExercice($idExo) {
+
+        $this->pdo->delete('tests', 'id_exo ='. $idExo .' ' );
         $this->pdo->delete('exos', 'id_exo ='. $idExo .' ' );
 
     }
@@ -68,13 +76,22 @@ final class Admin
             'description_exo' => $description,
             'objectif_exo' => $obj,
             'text_de_base' => $contenuExo,
-            'fichier_test' => $test
         ], 'id_exo ='. $idExo .' ');
+        $stmt =$this->pdo->update('exos', [
+            'fichier' => $test,
+        ], 'id_exo ='. $idExo .' ');
+
+
     }
 
     public function getExercice($idExo) {
         $customWhere = "id_exo = :id_exo";
         $result = $this->pdo->select('exos', ['id_exo' => $idExo], '*', $customWhere);
+        return $result[0];
+    }
+    public function getTests($idExo) {
+        $customWhere = "id_exo = :id_exo";
+        $result = $this->pdo->select('tests', ['id_exo' => $idExo], '*', $customWhere);
         return $result[0];
     }
 

@@ -15,26 +15,24 @@ final class Exo
         return $result[0];
     }
 
-    public function donneIndice($id_exo)
+    public function donneIndice($id_exo): array
     {
-
-        $result = $this->pdo->select('exos_indices', ['id_exo' => $id_exo], '*', 'id_exo = :id_exo');
-        if (!empty($result)) {
-            return $result[0];
-        }
-        else {
-            return;
-        }
+        return $this->pdo->select('exos_indices', ['id_exo' => $id_exo], 'indice', 'id_exo = :id_exo');
+    }
+    public function donneTests($id_exo): array
+    {
+        return  $this->pdo->select('tests', ['id_exo' => $id_exo], 'fichier', 'id_exo = :id_exo');
     }
 
+    public function getTousLesTests(): array
+    {
+        return $this->pdo->select('tests');
+    }
     public function getTousLesExercices(): array
     {
         return $this->pdo->select('exos');
     }
 
-    public function getExoEtTests($idExo)
-    {
-        return $this->pdo->select('exos', ['id_exo' => $idExo])[0];
-    }
+
 
 }

@@ -1,5 +1,6 @@
 <?php
 $exercice= $A_vue['exercice'];
+$test = $A_vue['tests'];
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +45,7 @@ $exercice= $A_vue['exercice'];
             </div>
             <div class="flex-container5">
                 <label for="testsUnitaires">Tests unitaires:</label></br>
-                <textarea id="testsUnitaires" name="testsUnitaires" required="required"><?php echo $exercice['fichier_test']?></textarea><br>
+                <textarea id="testsUnitaires" name="testsUnitaires" required="required"><?php echo $test['fichier']?></textarea><br>
             </div>
         </div>
     </div>

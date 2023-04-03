@@ -7,7 +7,7 @@ final class ControleurExo
         $O_exoChoisi = new Exo();
         $id_exo = $_GET['id_exo'];
         $_SESSION['id_exo'] = $id_exo;
-        Vue::montrer('Exo/voir', array('ExoChoisi' => $O_exoChoisi->donneExo($id_exo), 'Indice' => $O_exoChoisi->donneIndice($id_exo)));
+        Vue::montrer('Exo/voir', array('ExoChoisi' => $O_exoChoisi->donneExo($id_exo), 'Tests' => $O_exoChoisi->donneTests($id_exo), 'Indice' => $O_exoChoisi->donneIndice($id_exo)));
     }
 
     public function tableauScoreAction() : void

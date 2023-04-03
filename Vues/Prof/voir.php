@@ -5,9 +5,9 @@
 </head>
 <body>
 <h1>Inscription professeur</h1>
-<form action="index.php?url=Prof/enregistrer" method="post">
-    <label for="name">Nom :</label>
-    <input type="text" name="name" required><br>
+<form action="index.php?url=Prof/register" method="post">
+    <label for="nom">Nom :</label>
+    <input type="text" name="nom" required><br>
     <label for="profession">Profession :</label>
     <input type="text" name="profession" required><br>
     <label for="email">Email :</label>

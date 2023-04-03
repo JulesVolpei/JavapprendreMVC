@@ -31,6 +31,9 @@
             <div class="deconnexion-container">
                 <a href="index.php?url=Utilisateur/deconnexion" class="bn14">Déconnexion</a>
             </div>
+            <div class="prof-container">
+                <a href="index.php?url=Prof" class="bn14">Prof</a>
+            </div>
 
                 <?php if (isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) { ?>
                     <div class="creer-container"><a href="index.php?url=Admin/creer" class="bn14">Créer exercice</a></div>

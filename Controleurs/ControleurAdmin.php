@@ -55,7 +55,7 @@ final class ControleurAdmin
     public function modifierAction(){
         $O_modifier = new Admin();
         $id_exo =  $_GET['id_exo'];
-        Vue::montrer('Admin/modifier', array('exercice' => $O_modifier->getExercice($id_exo)));
+        Vue::montrer('Admin/modifier',  array('exercice' => $O_modifier->getExercice($id_exo), 'tests' => $O_modifier->getTests($id_exo)));
     }
 
     function modifierExerciceAction(array $urlParameters, array $A_postParams = null)

@@ -2,10 +2,7 @@
 $indiceExo = $A_vue['Indice'];
 if (isset($indiceExo['indice'])) {
     $indices = $indiceExo['indice'];
-
-    $indices = explode('|', $indices);
 }
-
 $resultats = $A_vue['ExoChoisi'];
 $idExo = $_SESSION['id_exo'];
 
@@ -13,10 +10,8 @@ $idExo = $_SESSION['id_exo'];
 $numFichiersTests = $resultats['numFichiersTests'];
 //getting all the test files as a single string:
 
-$chemin_fichier_test = $resultats['fichier_test'];
+$chemin_fichier_test = $A_vue['Tests'];
 //splitting the test files into an array:
-$files = explode("\n", $chemin_fichier_test);
-
 ?>
 
 <!DOCTYPE html>
@@ -111,8 +106,8 @@ else {
         <?php
         for($x = 1; $x < $numFichiersTests; ++$x)
         {
-            $indice = $indices[$x - 1];
-            echo '<br><div class = "test-child">Test ' . $files[$x] .'<div class = "sign" id = "test-'.$x.'"></div><div id = "dialog-'.$x.'" title = "Indice exo">'.$indice.'</div> <button id = "opener-'.$x.'" class = "bn15">Voir indice</button><button class = "bn15" onclick = "executeCode('.$x. ', this)">Run</button></div><br>';
+            echo '<br><div class = "test-child">Test ' . $chemin_fichier_test[$x]['fichier'] .'<div class = "sign" id = "test-'.$x.'"></div><div id = "dialog-'.$x.'" title = "Indice exo">'.$indiceExo[$x - 1]['indice'].'</div> <button id = "opener-'.$x.'" class = "bn15">Voir indice</button><button class = "bn15" onclick = "executeCode('.$x. ', this)">Run</button></div><br>';
+
         }
         ?>
 

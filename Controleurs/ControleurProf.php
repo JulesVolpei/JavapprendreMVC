@@ -10,11 +10,12 @@ class ControleurProf
     public function registerAction()
     {
         $O_prof = new Prof();
-        $nom = $_POST['nom'];
+        $email = $_POST['email'];
         $profession = $_POST['profession'];
-        $mail = $_POST['email'];
+        $nom = $_POST['nom'];
+        $mem_id = $_SESSION['mem_id'];
         $token = bin2hex(random_bytes(16));
-
+        $O_prof->createProf($email, $nom, $profession, $token, $mem_id);
         Vue::montrer('Prof/confirme', array('token' => $token));
     }
 
@@ -23,7 +24,7 @@ class ControleurProf
         $O_prof = new Prof();
 
         $token = $_POST['token'];
-        $this->professorModel->updateByToken($token, ['is_confirmed' => 1]);
+        $this->$O_prof->updateByToken($token, ['is_confirmed' => 1]);
 
         echo "Inscription confirmée. En attente de l'approbation de l'administrateur.";
     }
