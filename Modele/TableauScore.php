@@ -5,37 +5,34 @@ final class TableauScore
 
     public function __construct()
     {
-        $this->pdo = Connection::getInstance()->pdo;
+        $this->pdo = Connection::getInstance();
     }
 
     public function getScores(): array
     {
-        // On vérifie que la variable de session "id_exo" est initialisée
+        // On vérifie que la variable de session "id" est initialisée
         if (!isset($_SESSION['id_exo'])) {
-            // On retourne un tableau vide si la variable n'est pas initialisée
-            return array();
-        }
-
-        $id_exo = $_SESSION['id_exo'];
-        $query = $this->pdo->prepare('SELECT pseudo, temps FROM membre, score WHERE membre.mem_id=score.mem_id AND id_exo = :id_exo ORDER BY temps ASC');
-        $query->bindParam(':id_exo', $id_exo, PDO::PARAM_INT);
-        $query->execute();
-        return $query->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public function getExercice(): array
-    {
-        // On véréfie que la variable de session "id" est initialisée
-        if (!isset($_SESSION['id'])) {
             // on retourne un tableau vide si la variable n'est pas initialisée
             return array();
         }
 
-        $idExo = $_SESSION['id'] + 1;
-        $query = $this->pdo->prepare('select * from exos where id_exo = :id_Exo');
-        $query->bindParam("id_Exo", $idExo);
-        $query->execute();
-        return $query->fetch(PDO::FETCH_ASSOC);
+        $idExo = $_SESSION['id_exo'] + 1;
+        $customWhere = "membre.mem_id=score.mem_id AND id_exo = :id_exo";
+        $result = $this->pdo->select('membre, score', ['id_exo' => $idExo], 'pseudo, temps', $customWhere);
+        return $result;
+    }
+
+    public function getExercice(): array
+    {
+        // On vérifie que la variable de session "id" est initialisée
+        if (!isset($_SESSION['id_exo'])) {
+            // on retourne un tableau vide si la variable n'est pas initialisée
+            return array();
+        }
+
+        $idExo = $_SESSION['id_exo'] + 1;
+        $result = $this->pdo->select('exos', ['id_exo' => $idExo]);
+        return $result[0] ?? array();
     }
 
     public function afficherTableauScore(int $id_exo): void

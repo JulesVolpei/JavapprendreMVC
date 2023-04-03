@@ -12,11 +12,14 @@ final class Admin
 
 
     public function checkAdmin($mail) {
-        $customWhere = "admin.mem_id = membre.mem_id and membre.mail = :mail";
+        $conditions = [
+            "admin.mem_id = membre.mem_id",
+            "membre.mail = :mail"
+        ];
+        $customWhere = implode(' AND ', $conditions);
         $results = $this->pdo->select('admin, membre', ['mail' => $mail], 'COUNT(*) as compte', $customWhere);
         return $results[0]['compte'];
     }
-
 
 
     function creerExercice($nom, $description, $contenuExo, $obj, $test)
@@ -70,7 +73,9 @@ final class Admin
     }
 
     public function getExercice($idExo) {
-        $result = $this->pdo->select('exos', ['id_exo' => $idExo]);
+        $customWhere = "id_exo = :id_exo";
+        $result = $this->pdo->select('exos', ['id_exo' => $idExo], '*', $customWhere);
         return $result[0];
     }
+
 }

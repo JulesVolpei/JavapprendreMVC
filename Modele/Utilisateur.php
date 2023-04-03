@@ -4,7 +4,7 @@ final class Utilisateur {
 
     public function __construct()
     {
-        $this->pdo = Connection::getInstance(Connection::ROLE_MEMBRE)->pdo;
+        $this->pdo = Connection::getInstance(Connection::ROLE_MEMBRE);
     }
 
     public function checkPasswordStrength(string $password): bool
@@ -24,46 +24,47 @@ final class Utilisateur {
 
     public function verificationEmail($email)
     {
-        $result = $this->pdo->prepare('SELECT mail FROM membre WHERE mail = ?');
-        while(!$result ->execute(array($email))) {
-            $result ->execute(array($email));
-        }
-        $stmt = $result -> fetchAll(PDO::FETCH_ASSOC);
-        if (!empty($stmt)) {
+        $customWhere = "mail = :mail";
+        $result = $this->pdo->select('membre', ['mail' => $email], 'mail', $customWhere);
+        if (!empty($result)) {
             echo "L'e-mail est déjà associé à un compte, veuillez vous connecter avec le compte associé à ce mail, ou bien créez un nouveau compte.";
             die;
         }
     }
 
-    public function inscription($email, $mdp, $pseudo )
+    public function inscription($email, $mdp, $pseudo)
     {
-// Hachage du mot de passe
+        // Hachage du mot de passe
         $mdphash = password_hash($mdp, PASSWORD_DEFAULT);
         // Insertion des données dans la base de données
-        $insert = $this->pdo->prepare('INSERT INTO membre(mail, pseudo, motdepasse) VALUES(?, ?, ?)');
-        $insert->execute(array($email, $pseudo, $mdphash));
-    }
-    public function connexion($email, $mdp)
-    {
-        $stmt = $this->pdo->prepare('SELECT * FROM membre WHERE mail = ?');
-        $stmt->execute(array($email));
-        $utilisateur = $stmt->fetch();
-        if ($utilisateur && password_verify($mdp, $utilisateur['motdepasse'])) {
-            $_SESSION['connecte'] = true;
-            $_SESSION['membre'] = $utilisateur;
-            $_SESSION['mail'] = $utilisateur['mail'];
-            $_SESSION['mem_id'] = $utilisateur['mem_id'];
-            return true;
-        } else {
-            return false;
-        }
+        $this->pdo->insert('membre', ['mail' => $email, 'pseudo' => $pseudo, 'motdepasse' => $mdphash]);
     }
 
-    public function connexionAdmin($email) {
-        $stmt = $this->pdo->prepare('SELECT mem_id FROM membre WHERE mail = ?');
-        $stmt->execute(array($email));
-        $admin= $stmt->fetch();
-        if ($admin['id_admin'] == 1 ) {
+    public function connexion($email, $mdp)
+    {
+        $customWhere = "mail = :mail";
+        $result = $this->pdo->select('membre', ['mail' => $email], '*', $customWhere);
+        if (!empty($result)) {
+            $utilisateur = $result[0];
+
+            if (password_verify($mdp, $utilisateur['motdepasse'])) {
+                $_SESSION['connecte'] = true;
+                $_SESSION['membre'] = $utilisateur;
+                $_SESSION['mail'] = $utilisateur['mail'];
+                $_SESSION['mem_id'] = $utilisateur['mem_id'];
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function connexionAdmin($email)
+    {
+        $customWhere = "mail = :mail";
+        $result = $this->pdo->select('membre', ['mail' => $email], 'mem_id', $customWhere);
+        $admin = $result[0];
+
+        if ($admin['id_admin'] == 1) {
             $_SESSION['admin'] = true;
             return true;
         } else {

@@ -16,7 +16,7 @@ $exercice= $A_vue['exercice'];
 
 <body>
 
-<a href="index.php?url=Admin/checkAdmin"><img src="/images/logo1.png" alt="Logo" class="logo"></a>
+<a href="index.php?url=ChoixExercice"><img src="/images/logo.png" alt="Logo" class="logo"></a>
 <form method="POST" action="index.php?url=Admin/modifierExercice&id_exo=<?php echo $_GET['id_exo']; ?>">
 
     <div class="all-container">
