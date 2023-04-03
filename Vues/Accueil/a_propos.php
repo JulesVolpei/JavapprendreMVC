@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/aPropos.css">
 </head>
-
+<div class="image-container"></div><a href="index.php?url=Accueil"><img src="/images/logo1.png" alt="Logo" class="logo"></a><div/>
 <body>
     <div class="container">
 
