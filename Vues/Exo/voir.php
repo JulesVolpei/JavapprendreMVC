@@ -83,7 +83,7 @@ $files = explode("\n", $chemin_fichier_test);
 <div class = "form-code">
     <a href="#" class="brese" onclick = "javascript:reset_code();"> Reset </a>
 
-    <textarea id = "editing" spellcheck = "false" autocomplete = "off" oninput  = "update(this.value); sync_scroll(this);" onscroll="sync_scroll(this);" onkeydown="check_tab(this, event);"><?php echo $resultats['text_de_base'] ?></textarea>
+    <label for="editing"></label><textarea id = "editing" spellcheck = "false" autocomplete = "off" oninput  = "update(this.value); sync_scroll(this);" onscroll="sync_scroll(this);" onkeydown="check_tab(this, event);"><?php echo $resultats['text_de_base'] ?></textarea>
     <!-- Pre and code tags because otherwise we can not use Prism.js in a textarea-->
 
     <pre id = "highlighting" aria-hidden = "true"><code class = "language-java" id = "highlighting-content"></code></pre>

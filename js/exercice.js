@@ -105,6 +105,7 @@ function executeCode(index, e) {
             $(".output").text(response)
             var nom = document.getElementById("nom_exo").innerText.substring(12).split(' ').join('');
             console.log(nom);
+            console.log( $(".output").text(response));
             var image = document.querySelectorAll(".visuel")[0];
             var t = document.getElementById("test-" + index);
             //if (nom != "Pirate") {

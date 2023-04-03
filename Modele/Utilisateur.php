@@ -1,10 +1,11 @@
 <?php
 final class Utilisateur {
     private $pdo;
-
+    private $connection;
     public function __construct()
     {
-        $this->pdo = Connection::getInstance(Connection::ROLE_MEMBRE);
+        $this->pdo = Connection::getInstance(Connection::ROLE_ADMIN);
+
     }
 
     public function checkPasswordStrength(string $password): bool
@@ -25,7 +26,7 @@ final class Utilisateur {
     public function verificationEmail($email)
     {
         $customWhere = "mail = :mail";
-        $result = $this->pdo->select('membre', ['mail' => $email], 'mail', $customWhere);
+        $result = $this->connection->select('membre', ['mail' => $email], 'mail', $customWhere);
         if (!empty($result)) {
             echo "L'e-mail est déjà associé à un compte, veuillez vous connecter avec le compte associé à ce mail, ou bien créez un nouveau compte.";
             die;
@@ -37,13 +38,13 @@ final class Utilisateur {
         // Hachage du mot de passe
         $mdphash = password_hash($mdp, PASSWORD_DEFAULT);
         // Insertion des données dans la base de données
-        $this->pdo->insert('membre', ['mail' => $email, 'pseudo' => $pseudo, 'motdepasse' => $mdphash]);
+        $this->connection->insert('membre', ['mail' => $email, 'pseudo' => $pseudo, 'motdepasse' => $mdphash]);
     }
 
     public function connexion($email, $mdp)
     {
         $customWhere = "mail = :mail";
-        $result = $this->pdo->select('membre', ['mail' => $email], '*', $customWhere);
+        $result = $this->connection->select('membre', ['mail' => $email], '*', $customWhere);
         if (!empty($result)) {
             $utilisateur = $result[0];
 
@@ -61,7 +62,7 @@ final class Utilisateur {
     public function connexionAdmin($email)
     {
         $customWhere = "mail = :mail";
-        $result = $this->pdo->select('membre', ['mail' => $email], 'mem_id', $customWhere);
+        $result = $this->connection->select('membre', ['mail' => $email], 'mem_id', $customWhere);
         $admin = $result[0];
 
         if ($admin['id_admin'] == 1) {

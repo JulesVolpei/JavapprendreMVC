@@ -12,23 +12,28 @@ $exercices = $exoInstance->getTousLesExercices();
 $cheminFichierTest = $exercices[$idExo]['fichier_test'];
 $fichiers = explode("\n", $cheminFichierTest);
 
-$nouveauCheminFichierTest =  __DIR__  . '/../javatests/'.$fichiers[$index].".java";
-$nouveauCheminFichdierTest = __DIR__ . '/../javatests/TestSoustraction.java';
-
+$nouveauCheminFichierTest = '../javatests/'.trim($fichiers[$index]).".java";
 $cheminFichier = "../javatests/" . $exercices[$idExo]['fichier'] . ".java";
-
 $programFile = fopen($cheminFichier, "w") or die(" ! Unable to open file!");
 
 fwrite($programFile, $code);
 fclose($programFile);
 $output = null;
 exec('javac ' . $cheminFichier . ' && java ' . $cheminFichier, $output, $returnValue);
-echo $returnValue;
-if ($returnValue != 0) {
-    $output = shell_exec("java " . $cheminFichier . "2>&1");
+$output = shell_exec("java TestExecution " . $exercices[$idExo]['fichier']);
+if ($output != 0) {
 
-} else {
-    shell_exec("javac " . $nouveauCheminFichdierTest);
-    $output = shell_exec("java " . $nouveauCheminFichdierTest . "2>&1");
 }
-echo $output;
+if ($returnValue != 0) {
+    $output = shell_exec("javac ". $cheminFichier . " 2>&1");
+    echo "Il y a un problème dans votre programme :\n" . $output;
+} else {
+    $userProgramOutput = implode("", $output);
+    if ($userProgramOutput == "1") {
+        echo "Votre programme a rencontré une erreur lors de l'exécution.";
+    } else {
+        shell_exec("javac " . $nouveauCheminFichierTest);
+        $output = shell_exec("java " . $nouveauCheminFichierTest . " 2>&1");
+        echo $output;
+    }
+}

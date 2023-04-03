@@ -6,7 +6,7 @@ final class Exo
 
     public function __construct()
     {
-        $this->pdo = Connection::getInstance(Connection::ROLE_ADMIN);
+        $this->pdo = Connection::getInstance();
     }
 
     public function donneExo($id_exo)
