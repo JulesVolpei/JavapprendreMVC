@@ -4,7 +4,7 @@ final class Utilisateur {
 
     public function __construct()
     {
-        $this->pdo = Connection::getInstance()->pdo;
+        $this->pdo = Connection::getInstance(Connection::ROLE_MEMBRE)->pdo;
     }
 
     public function checkPasswordStrength(string $password): bool
@@ -24,7 +24,6 @@ final class Utilisateur {
 
     public function verificationEmail($email)
     {
-        $connection = Connection::getInstance();
         $result = $this->pdo->prepare('SELECT mail FROM membre WHERE mail = ?');
         while(!$result ->execute(array($email))) {
             $result ->execute(array($email));

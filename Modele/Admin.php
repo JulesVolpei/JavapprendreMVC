@@ -7,7 +7,7 @@ final class Admin
 
     public function __construct()
     {
-        $this->pdo = Connection::getInstance()->pdo;
+        $this->pdo = Connection::getInstance(Connection::ROLE_ADMIN)->pdo;
     }
 
 
