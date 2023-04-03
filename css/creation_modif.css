@@ -23,6 +23,7 @@ html, body{
   border-radius: 50%;
   padding: 20px;
   transition: transform 0.2s ease-in-out;
+  width: 115px;
 }
 
 img:hover {

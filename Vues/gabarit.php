@@ -17,6 +17,8 @@ if (isset($_GET['url'])) {
         ($_GET['url'] == 'Admin/checkAdmin') ||
         ($_GET['url'] == 'Admin/supprimer') ||
         ($_GET['url'] == 'Admin/supprimerExercice') ||
+        ($_GET['url'] == 'Admin/modifier') ||
+        ($_GET['url'] == 'Admin/creer') ||
         ($_GET['url'] == 'Exo')) {
         
         return;

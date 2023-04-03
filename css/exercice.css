@@ -1,20 +1,13 @@
 .navigation {
-    height: 70px;
-    background: #52D1DC;
+    height: 90px;
+    background: #707d9d;
 }
 
-.brand {
-    position: absolute;
-    padding-left: 20px;
-    float: left;
-    line-height: 70px;
-    text-transform: uppercase;
-    font-size: 1.4em;
+div {
+    border-radius: 5px;
 }
-
 .brand>a,
 a:visited {
-    color: #ffffff;
     text-decoration: none;
 }
 
@@ -24,9 +17,6 @@ a:visited {
     justify-content: space-between;
 }
 
-nav {
-    float: right;
-}
 
 nav ul {
     list-style: none;
@@ -95,33 +85,37 @@ nav ul li a:visited:hover {
 }
 
 #nom_exo {
+    margin-right: 30px;
     font-family: lato, sans-serif;
     font-weight: bold;
-    font-size: 1em;
     letter-spacing: 0.1em;
     text-decoration: none;
     color: #ffffff;
     display: inline-table;
     padding: 10px 40px 10px 40px;
     position: relative;
-    border: 3px solid #ffffff;
-    border-radius: 25px;
     margin-top: 15px;
+    text-transform: uppercase;
+    font-size: 20px;
 }
 
 .brese {
+    margin-left: 10px;
     font-family: lato, sans-serif;
     font-weight: bold;
-    font-size: 1em;
-    letter-spacing: 0.1em;
+    font-size: 1.5em;
     text-decoration: none;
-    display: inline-block;
-    padding: 10px 40px 10px 40px;
     position: relative;
-    border: 3px solid #252525;
-    border-radius: 25px;
-    background-color: #52D1DC;
-    font-family: Consolas, monaco, monospace;
+    top: 10px;
+    color: white;
+    background-color: #638585;
+    bottom: 2px;
+    padding: 8px;
+}
+
+.brese:hover{
+    transition-duration: 0.5s;
+    background-color: #7eabad;
 }
 
 .form-code {
@@ -184,7 +178,7 @@ nav ul li a:visited:hover {
 .output {
     width: 48%;
     height: 200px;
-    margin-top: 50px;
+    margin-top: 30px;
     background-color: #96c0c4;
     color: #252525;
     overflow: auto;
@@ -197,15 +191,36 @@ nav ul li a:visited:hover {
     font-family: Consolas, monaco, monospace;
 }
 
-.visuel {
-    width: 48%;
+.visuel  {
+    width: 532px;
     height: 300px;
-    margin-top: 20px;
-    background-color: #96c0c4;
+    margin-top: 30px;
     color: #252525;
     overflow: auto;
-    margin-left: 10px;
+    margin-left: 10%;
     word-break: break-word;
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    border: #96c0c4 5px solid;
+}
+
+.exo-prof  {
+    width: 532px;
+    height: 300px;
+    margin-top: 30px;
+    color: #252525;
+    overflow: auto;
+    margin-left: 10%;
+    word-break: break-word;
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    border: #96c0c4 5px solid;
+}
+
+.exo-prof  img{
+    border-radius: 5px;
 }
 
 .objectif {
@@ -316,11 +331,13 @@ nav ul li a:visited:hover {
     color: #ffffff;
     display: inline-block;
     padding: 10px 40px 10px 40px;
-    position: relative;
-    border: 3px solid #ffffff;
-    border-radius: 25px;
-    margin-left: 30%;
-    margin-top: 15px;
+    position: absolute;
+}
+
+.image-chrono {
+    position: absolute;
+    top: 1px;
+    margin-left: 27px
 }
 
 #presenter {
@@ -335,8 +352,14 @@ dt {
 }
 
 .visuel {
-    /*background-image: url("../images/Pirate.png");*/
     background-repeat: no-repeat;
     background-size:contain;
     background-position: center;
 }
+
+.exo-prof {
+    background-repeat: no-repeat;
+    background-size:contain;
+    background-position: center;
+}
+
