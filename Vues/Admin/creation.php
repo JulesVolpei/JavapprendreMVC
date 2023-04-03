@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/creation_modif.css">
 </head>
 <body>
-    <div class="image-container"></div><a href="index.php?url=Admin/checkAdmin"><img src="/images/logo.png" alt="Logo" class="logo"></a><div/>
+    <div class="image-container"></div><a href="index.php?url=Admin/checkAdmin"><img src="/images/logo1.png" alt="Logo" class="logo"></a><div/>
     <form method="POST" action="index.php?url=Admin/creerExercice">
         <div class="all-container">
             <div class="left-flex-box">

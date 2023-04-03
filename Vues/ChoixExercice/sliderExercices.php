@@ -18,18 +18,28 @@
 <body>
 <section class="navigation">
     <div class="nav-container">
-        <a href="index.php"><img src="/css/images/logo.png" alt="Logo"></a>
+        <div class="image-container">
+            <a href="index.php"><img class="logo" src="images/logo1.png" alt="Logo"></a>
+        </div>
 
         <div class="bouttons">
-            <a class="bn14">Progression : <?php echo $_SESSION['membre']['exo']; ?>/<?php echo count($A_vue['exercices']); ?> </a>
-            <a href="index.php?url=Utilisateur/deconnexion" class="bn14">Déconnexion</a>
-            <?php if (isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) { ?>
-                <a href="index.php?url=Admin/creer" class="bn14">Créer exercice</a>
-            <?php }
-            else { ?>
-            <a href="index.php?url=Admin/checkAdmin" class="bn14">Admin</a>
-            <?php }?>
-            <a href="index.php?url=Prof" class="bn14">Prof test</a>
+
+            <div class="progression-container">
+                <a class="progression-link"> Votre progression : <?php echo $_SESSION['membre']['exo']; ?>/<?php echo count($A_vue['exercices']); ?></a>
+            </div>
+
+            <div class="deconnexion-container">
+                <a href="index.php?url=Utilisateur/deconnexion" class="bn14">Déconnexion</a>
+            </div>
+
+                <?php if (isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) { ?>
+                    <div class="creer-container"><a href="index.php?url=Admin/creer" class="bn14">Créer exercice</a></div>
+                <?php }
+
+                else { ?>
+                    <div class="admin-container"><a href="index.php?url=Admin/checkAdmin" class="bn14">Admin</a></div>
+                <?php }?>
+
 
         </div>
 
@@ -52,7 +62,7 @@
 ';
 
             if ($x >= 5) {
-                echo ' <a class="type-exercice">(Exercice créé par la communauté)<a/>
+                echo ' <a class="type-exercice">(Exercice créé par un professeur)<a/>
                 <img src="css/images/crayon.png" alt="'.$A_vue['exercices'][$x]['description_exo'] . '">
 ';
             } else {
