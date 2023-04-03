@@ -63,16 +63,17 @@ $files = explode("\n", $chemin_fichier_test);
 <!--Navigation bar -->
 <section class="navigation">
     <div class="nav-container">
-
-        <div class="brand">
-            <a href="index.php?url=ChoixExercice"><img src="/images/logo.png" alt="Logo"></a>
+        <div class="image-container">
+            <a href="index.php"><img class="logo-imagetest" src="images/logo1.png" alt="Logo"></a>
         </div>
-
-        <div name="affi" id="time"></div>
+        <div class="affichage-temps">
+            <div name="affi" id="time"></div>
+            <div class="image-chrono"><img src="images/chrono.png"></div>
+        </div>
         <div id = "nom_exo" data-id="<?php echo $idExo; ?>">
             <?php
             $ind = $idExo + 1;
-            echo $ind.". ".$resultats['description_exo'] ; ?>
+            echo $ind." - ".$resultats['description_exo']; ?>
         </div>
 
         <!--<a href="#" class="bn14">Indice</a>-->
@@ -92,7 +93,14 @@ $files = explode("\n", $chemin_fichier_test);
 
 </div>
 <!-- Rendu visuel -->
-<div class = "visuel"></div>
+
+<?php if ($idExo > 5) {
+    echo '<div class = "exo-prof"><img src="css/images/crayon.png"></div>';
+ }
+else {
+    echo '<div class = "visuel"></div>';
+ }?>
+
 <!-- Console -->
 <div class="output">Output</div>
 <!-- Objectif -->

@@ -33,8 +33,10 @@ Used css and javascript to make it look like we are editing only one element
 
 window.onload = function() {
     var nom = document.getElementById("nom_exo").innerText.substring(12).split(' ').join('');
+
     var image = document.querySelectorAll(".visuel")[0];
     image.style.backgroundImage = "url(images/" + nom + ".png)";
+
     text_base = document.getElementById("editing").value;
     console.log(text_base);
     let result_element = document.querySelector("#highlighting-content");
