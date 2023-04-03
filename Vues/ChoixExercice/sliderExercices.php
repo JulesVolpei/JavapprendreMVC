@@ -23,10 +23,14 @@
         <div class="bouttons">
             <a class="bn14">Progression : <?php echo $_SESSION['membre']['exo']; ?>/<?php echo count($A_vue['exercices']); ?> </a>
             <a href="index.php?url=Utilisateur/deconnexion" class="bn14">Déconnexion</a>
-            <a href="index.php?url=Admin/checkAdmin" class="bn14">Admin</a>
             <?php if (isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) { ?>
                 <a href="index.php?url=Admin/creer" class="bn14">Créer exercice</a>
-            <?php } ?>
+            <?php }
+            else { ?>
+            <a href="index.php?url=Admin/checkAdmin" class="bn14">Admin</a>
+            <?php }?>
+            <a href="index.php?url=Prof" class="bn14">Prof test</a>
+
         </div>
 
     </div>

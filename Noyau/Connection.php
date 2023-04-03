@@ -37,6 +37,35 @@ final class Connection
     {
         return $this->pdo;
     }
+    private function getCurrentUserId(): int
+    {
+        // Récupérez l'ID de l'utilisateur actuellement connecté à partir de votre système d'authentification
+        // Par exemple, si vous stockez l'ID de l'utilisateur dans une session :
+        return $_SESSION['mem_id'];
+    }
+    private function checkPermission(string $action, string $table, array $conditions = []): bool
+    {
+        if ($this->userRole === self::ROLE_ADMIN) {
+            return true;
+        }
+
+        if ($table === 'exos') {
+            if ($this->userRole === self::ROLE_PROF && in_array($action, ['update', 'delete'])) {
+                // Vérifier si l'exercice appartient au professeur
+                $exercice = $this->select($table, $conditions);
+                if (!empty($exercice) && $exercice[0]['created_by'] == $this->getCurrentUserId()) {
+                    return true;
+                }
+            }
+        }
+
+        if ($action === 'select') {
+            return true;
+        }
+
+        return false;
+    }
+
     public function insert(string $table, array $parameters): bool
     {
         if (!$this->checkPermission('insert', $table, $parameters)) {
@@ -118,7 +147,10 @@ final class Connection
 
         try {
             $stmt = $this->pdo->prepare($query);
-            $stmt->execute($conditions);
+            foreach ($conditions as $key => $value) {
+                $stmt->bindParam(":$key", $value);
+            }
+            $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             die('Error : ' . $e->getMessage());
