@@ -67,7 +67,7 @@ $chemin_fichier_test = $A_vue['Tests'];
         </div>
         <div id = "nom_exo" data-id="<?php echo $idExo; ?>">
             <?php
-            $ind = $idExo + 1;
+            $ind = $idExo ;
             echo $ind." - ".$resultats['description_exo']; ?>
         </div>
 

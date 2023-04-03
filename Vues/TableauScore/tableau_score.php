@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +18,8 @@
                 <?= $exercice['id_exo'] ?>. <?= $exercice['description_exo'] ?>
             </div>
         <?php endif; ?>
+
+
     </div>
 </section>
 <table>
@@ -26,16 +27,15 @@
         <th>Pseudo</th>
         <th>Temps</th>
     </tr>
-    <?php if (isset($tableau_scores)) : ?>
-        <?php foreach ($tableau_scores as $score) : ?>
-            <tr>
-                <td><?= $score['pseudo'] ?></td>
-                <td><?= $score['temps'] ?></td>
-            </tr>
-        <?php endforeach; ?>
-    <?php endif; ?>
+    <?php
+
+    foreach ($A_vue['tableau_scores'] as $score) : ?>
+        <tr>
+            <td><?= $score['pseudo'] ?></td>
+            <td><?= $score['temps'] ?></td>
+        </tr>
+    <?php endforeach; ?>
+
 </table>
-
-
 </body>
 </html>
