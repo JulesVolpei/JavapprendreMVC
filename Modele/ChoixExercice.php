@@ -1,19 +1,14 @@
 <?php
 final class ChoixExercice {
-    private $pdo;
+    private $connection;
 
     public function __construct()
     {
-        $this->pdo = Connection::getInstance()->pdo;
+        $this->connection= Connection::getInstance();
     }
 
     public function getTousLesExercices() : array {
-        $result = $this->pdo->prepare('SELECT * FROM exos');
-        $result->execute();
-        $listeExercices = array();
-        foreach($result as $exercice) {
-            array_push($listeExercices, $exercice);
-        }
+        $listeExercices = $this->connection->select('exos');
         return $listeExercices;
     }
 

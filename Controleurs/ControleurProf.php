@@ -9,13 +9,19 @@ class ControleurProf
     }
     public function registerAction()
     {
-        $email = $_POST['email'];
+        $O_prof = new Prof();
+        $nom = $_POST['nom'];
+        $profession = $_POST['profession'];
+        $mail = $_POST['email'];
         $token = bin2hex(random_bytes(16));
+
         Vue::montrer('Prof/confirme', array('token' => $token));
     }
 
     public function confirmAction()
     {
+        $O_prof = new Prof();
+
         $token = $_POST['token'];
         $this->professorModel->updateByToken($token, ['is_confirmed' => 1]);
 

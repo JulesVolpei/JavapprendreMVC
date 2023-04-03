@@ -9,11 +9,11 @@ class Prof
         $this->pdo = Connection::getInstance(Connection::ROLE_PROF)->pdo;
     }
 
-    public function create($email, $token, $mem_id )
+    public function create($email, $nom, $profession, $token, $mem_id )
     {
         // Insertion des données dans la base de données
-        $insert = $this->pdo->prepare('INSERT INTO prof(mail, token, confirme, approuve, mem_id) VALUES(?, ?, 0, 0, ?)');
-        $insert->execute(array($email, $token, $mem_id));
+        $insert = $this->pdo->prepare('INSERT INTO prof(mail, nom, profession, token, confirme, approuve, mem_id) VALUES(?, ?, ?, ?, 0, 0, ?)');
+        $insert->execute(array($email, $nom, $profession, $token, $mem_id));
     }
     public function findByEmail(string $email)
     {
@@ -29,11 +29,20 @@ class Prof
         $result->execute(array($token, $mem_id));
     }
 
-    public function incrementAttempt($idExo)
+    public function incrementAttempt($mem_id)
     {
         $result = $this->pdo->prepare("SELECT * FROM prof where mem_id= ?");
-        $result->execute($idExo);
-        $essais= $result->fetch();
-        $update = $this->pdo->prepare('upd')
+        $result->execute($mem_id);
+        $result->fetch();
+        $essais = $result['attempts'] + 1;
+        $update = $this->pdo->prepare('update prof set attempts = ? where mem_id = ?');
+        return ($update->execute($essais,$mem_id));
+    }
+    public function deleteProfessor($prof_id)
+    {
+        $query = 'DELETE FROM prof WHERE prof_id = :prof_id';
+        $statement = $this->pdo->prepare($query);
+        $statement->bindValue(':idExo', $prof_id, PDO::PARAM_INT);
+        $statement->execute();
     }
 }

@@ -130,7 +130,7 @@ final class Connection
             die('Error : ' . $e->getMessage());
         }
     }
-    public function select(string $table, array $conditions = [], string $selectFields = '*'): array
+    public function select(string $table, array $conditions = [], string $selectFields = '*', string $customWhere = ''): array
     {
         if (!$this->checkPermission('select', $table, $conditions)) {
             throw new RuntimeException("Vous n'avez pas la permission d'effectuer cette action.");
@@ -143,12 +143,14 @@ final class Connection
                 $parameters[] = "$key = :$key";
             }
             $query .= ' WHERE ' . implode(' AND ', $parameters);
+        } elseif (!empty($customWhere)) {
+            $query .= ' WHERE ' . $customWhere;
         }
 
         try {
             $stmt = $this->pdo->prepare($query);
             foreach ($conditions as $key => $value) {
-                $stmt->bindParam(":$key", $value);
+                $stmt->bindParam(":$key", $conditions[$key]);
             }
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -156,5 +158,6 @@ final class Connection
             die('Error : ' . $e->getMessage());
         }
     }
+
 }
 
