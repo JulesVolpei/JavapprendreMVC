@@ -7,17 +7,16 @@ final class Admin
 
     public function __construct()
     {
-        $this->pdo = Connection::getInstance()->pdo;
+        $this->pdo = Connection::getInstance(Connection::ROLE_ADMIN);
     }
 
 
     public function checkAdmin($mail) {
-        $compte = $this->pdo->prepare("SELECT COUNT(*) as compte  FROM admin, membre WHERE admin.mem_id = membre.mem_id and membre.mail = ?");
-        $compte->execute(array($mail));
-        $row = $compte->fetch();
-        $admin = $row['compte'];
-        return $admin;
+        $customWhere = "admin.mem_id = membre.mem_id and membre.mail = :mail";
+        $results = $this->pdo->select('admin, membre', ['mail' => $mail], 'COUNT(*) as compte', $customWhere);
+        return $results[0]['compte'];
     }
+
 
 
     function creerExercice($nom, $description, $contenuExo, $obj, $test)
@@ -31,16 +30,21 @@ final class Admin
         fwrite($programFiles, $test);
         fclose($programFile);
         fclose($programFiles);
-        $result = $this->pdo->prepare( "INSERT INTO exos ( nom_exo,description_exo,objectif_exo,text_de_base,fichier_test, numFichiersTests, fichier) VALUES ( ?, ?, ? ,?, ?, 1, ?)"); //On insert dans la table exos le nom de l'exo, la description et le contenu
-        $result->execute(array($nom, $description, $obj,$contenuExo,$test, $nom));
+        $result = $this->pdo->insert('exos', [
+            'nom_exo' => $nom,
+            'description_exo' => $description,
+            'objectif_exo' => $obj,
+            'text_de_base' => $contenuExo,
+            'fichier_test' => $test,
+            'numFichiersTests' => 1,
+            'fichier' => $nom
+        ]);
     
     }
 
     function supprimerExercice($idExo) {
-        $query = 'DELETE FROM exos WHERE id_exo = :idExo';
-        $statement = $this->pdo->prepare($query);
-        $statement->bindValue(':idExo', $idExo, PDO::PARAM_INT);
-        $statement->execute();
+        $this->pdo->delete('exos', 'id_exo ='. $idExo .' ' );
+
     }
 
     function modifierExercice($nom, $description, $contenuExo, $obj, $test, $idExo)
@@ -56,14 +60,17 @@ final class Admin
         fclose($programFile);
         fclose($programFiles);
 
-        $result = $this->pdo->prepare( 'UPDATE exos set nom_exo = ?, description_exo = ?, objectif_exo = ?, text_de_base = ?, fichier_test = ? where id_exo = ?'); //On insert dans la table exos le nom de l'exo, la description et le contenu
-        $result->execute(array($nom, $description, $obj,$contenuExo,$test, $idExo));
+        $result = $this->pdo->update('exos', [
+            'nom_exo' => $nom,
+            'description_exo' => $description,
+            'objectif_exo' => $obj,
+            'text_de_base' => $contenuExo,
+            'fichier_test' => $test
+        ], 'id_exo ='. $idExo .' ');
     }
 
     public function getExercice($idExo) {
-        $sql = "SELECT * FROM exos WHERE id_exo = :id_exo";
-        $pdo = $this->pdo->prepare($sql);
-        $pdo->execute(['id_exo' => $idExo]);
-        return $pdo->fetch();
+        $result = $this->pdo->select('exos', ['id_exo' => $idExo]);
+        return $result[0];
     }
 }

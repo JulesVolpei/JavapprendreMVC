@@ -48,6 +48,8 @@ final class ControleurAdmin
         $idExo= $_GET['id_exo'];
         $O_admin =  new Admin();
         $O_admin-> supprimerExercice($idExo);
+        header('Location: index.php?url=ChoixExercice');
+
     }
 
     public function modifierAction(){

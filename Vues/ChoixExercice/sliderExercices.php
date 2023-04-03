@@ -23,6 +23,7 @@
         </div>
 
         <div class="bouttons">
+
             <div class="progression-container">
                 <a class="progression-link"> Votre progression : <?php echo $_SESSION['membre']['exo']; ?>/<?php echo count($A_vue['exercices']); ?></a>
             </div>
@@ -38,6 +39,7 @@
                 else { ?>
                     <div class="admin-container"><a href="index.php?url=Admin/checkAdmin" class="bn14">Admin</a></div>
                 <?php }?>
+
 
         </div>
 
