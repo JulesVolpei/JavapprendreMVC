@@ -21,7 +21,6 @@ final class TableauScore
         $result = $this->pdo->select('membre, score', ['id_exo' => $idExo], 'pseudo, temps', $customWhere);
         return $result;
     }
-
     public function getExercice(): array
     {
         // On vérifie que la variable de session "id" est initialisée
@@ -33,13 +32,6 @@ final class TableauScore
         $idExo = $_SESSION['id_exo'] + 1;
         $result = $this->pdo->select('exos', ['id_exo' => $idExo]);
         return $result[0] ?? array();
-    }
-
-    public function afficherTableauScore(int $id_exo): void
-    {
-        $tableau_scores = $this->getScoresByIdExo($id_exo);
-        $exercice = $this->getExerciceByIdExo($id_exo);
-        Vue::montrer('TableauScore/tableau_score', array('tableau_scores' => $tableau_scores, 'exercice' => $exercice));
     }
 
     public function getScoresByIdExo(int $id_exo): array

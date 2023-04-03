@@ -77,7 +77,7 @@ final class Connection
 
         $stmt = $this->pdo->prepare($query);
         foreach ($parameters as $attribute => $value) {
-            $stmt->bindParam($attribute, $value);
+            $stmt->bindValue(':' . $attribute, $value);
         }
         $result = $stmt->execute();
 
