@@ -1,16 +1,17 @@
 <?php
 // fichier exerciceModel.php
+// fichier exerciceModel.php
 final class Admin
 {
     private $pdo;
 
-
+    // Constructeur de la classe Admin
     public function __construct()
     {
         $this->pdo = Connection::getInstance(Connection::ROLE_ADMIN);
     }
 
-
+    // Vérifie si l'administrateur avec l'adresse mail donnée existe dans la base de données
     public function checkAdmin($mail) {
         $conditions = [
             "admin.mem_id = membre.mem_id",
@@ -21,18 +22,21 @@ final class Admin
         return $results[0]['compte'];
     }
 
-
+    // Crée un nouvel exercice avec le nom, la description, le contenu, l'objectif et les tests donnés en paramètres
     function creerExercice($nom, $description, $contenuExo, $obj, $test)
     {
+        // Créer deux fichiers : un pour le code de l'exercice et un autre pour les tests
         $nom_test = "Test" . $nom;
         $filePath = "./javatests/" . $nom . ".java";
         $filesPath = "./javatests/" . "Test" . $nom . ".java";
-        $programFile = fopen($filePath, "w") or die("Unable to open file!");
-        $programFiles = fopen($filesPath, "w") or die("Unable to open file!");
+        $programFile = fopen($filePath, "w") or die("Impossible d'ouvrir le fichier !");
+        $programFiles = fopen($filesPath, "w") or die("Impossible d'ouvrir le fichier !");
         fwrite($programFile, $contenuExo);
         fwrite($programFiles, $test);
         fclose($programFile);
         fclose($programFiles);
+
+        // Insère les informations de l'exercice dans la base de données
         $result = $this->pdo->insert('exos', [
             'nom_exo' => $nom,
             'description_exo' => $description,
@@ -42,13 +46,19 @@ final class Admin
             'numFichiersTests' => 1,
             'fichier' => $nom
         ]);
-    
     }
+
+
+
+
+    // Supprime l'exercice correspondant à l'id passé en paramètre.
 
     function supprimerExercice($idExo) {
         $this->pdo->delete('exos', 'id_exo ='. $idExo .' ' );
-
     }
+
+
+     // Modifie les données d'un exercice dans la base de données.
 
     function modifierExercice($nom, $description, $contenuExo, $obj, $test, $idExo)
     {
@@ -72,9 +82,12 @@ final class Admin
         ], 'id_exo ='. $idExo .' ');
     }
 
+
+     //Récupère les informations sur l'exercice correspondant à l'id passé en paramètre.
+
     public function getExercice($idExo) {
         $customWhere = "id_exo = :id_exo";
-        $result = $this->pdo->select('exos', ['id_exo' => $idExo], '*', $customWhere);
+        $result = $this->select('exos', ['id_exo' => $idExo], '*', $customWhere);
         return $result[0];
     }
 
